@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<style>
+#accordion .panel{
+ border: none;
+ box-shadow: none;
+ border-radius: 0;
+ margin-bottom: -5px;
+}
+#accordion .panel-heading{
+ padding: 0;
+ border-radius: 0;
+ border: none;
+ text-align: center;
+}
+#accordion .panel-title a{
+ display: block;
+ padding: 25px 30px;
+ font-size: 16px;
+ font-weight: bold;
+ color: #fff;
+ background: #333;
+ border-bottom: 1px solid #4a4a4a;
+ position: relative;
+ transition: all 0.5s ease 0s;
+}
+#accordion .panel-title a:hover{
+ background: #4a4a4a;
+}
+#accordion .panel-title a:after,
+#accordion .panel-title a.collapsed:after{
+ content: "\f067";
+ font-family: FontAwesome;
+ font-size: 15px;
+ font-weight: 200;
+ position: absolute;
+ top: 25px;
+ left: 15px;
+ transform: rotate(135deg);
+ transition: all 0.5s ease 0s;
+}
+#accordion .panel-title a.collapsed:after{
+ transform: rotate(0deg);
+}
+#accordion .panel-body{
+ background: #167ea0;
+ padding: 0 0 0 40px;
+ border: none;
+ position: relative;
+}
+#accordion .panel-body p{
+ font-size: 14px;
+ color: #fff;
+ line-height: 25px;
+ background: #3296b7;
+ padding: 30px;
+ margin: 0;
+}
+#accordion .panel-collapse .panel-body p{
+ opacity: 0;
+ transform: scale(0.9);
+ transition: all 0.5s ease-in-out 0s;
+}
+#accordion .panel-collapse.in .panel-body p{
+ opacity: 1;
+ transform: scale(1);
+}
+   ul li {
+        display: inline;
+        padding: 10px;
+       float: left;
+}
+      /*    .field {clear:both; text-align:right;line-height:25px;}*/
+      /*.input_data {float:left}*/
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header row">
+            <a href="/testpage/test" class="navbar-brand col-md-1">ВЭИП 2.0</a>
+        </div>
+        <div class="col-md-11">
+            <ul class="list-inline">
+                <li class="active"><a href="#">Расчеты</a></li>
+                <li><a href="/testpage/history">История расчетов</a></li>
+                <li><a href="#">Теория</a></li>
+                <li><a href="/testpage/change">Изменить данные</a></li>
+                {% if username %}
+                <li><a  href="/auth/logout/">Выйти ({{ username }})</a></li>
+                {% else %}
+                <li><a href="/auth/login/">Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+<div class="row">
+
+ <div>
+ <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+ <div class="panel panel-default">
+ <div class="panel-heading" role="tab" id="headingOne">
+ <h4 class="panel-title">
+ <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+ SECTION 1
+ </a>
+ </h4>
+ </div>
+ <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+ <div class="panel-body">
+ <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="panel panel-default">
+ <div class="panel-heading" role="tab" id="headingTwo">
+ <h4 class="panel-title">
+ <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+ SECTION 2
+ </a>
+ </h4>
+ </div>
+ <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+ <div class="panel-body">
+ <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="panel panel-default">
+ <div class="panel-heading" role="tab" id="headingThree">
+ <h4 class="panel-title">
+ <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+ SECTION 3
+ </a>
+ </h4>
+ </div>
+ <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+ <div class="panel-body">
+ <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="panel panel-default">
+ <div class="panel-heading" role="tab" id="headingFour">
+ <h4 class="panel-title">
+ <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+ SECTION 4
+ </a>
+ </h4>
+ </div>
+ <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+ <div class="panel-body">
+ <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+
+</div><!-- ./row -->
+</div><!-- ./container -->
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>VEIP</title>
+    <style>
+
+        @font-face { font-family: Arial; src: url("{% static 'fonts/Ari.ttf' %}") format("truetype"); }
+        body{
+    font-family: Arial, ' sans-serif';
+    color: #141314;
+}
+      #navbar {
+        margin: 0 auto;
+        padding: 0;
+        list-style-type: none;
+        border: 2px solid #000000;
+        border-radius: 20px 5px;
+        width: 1000px;
+        text-align: center;
+        background-color: #000000;
+      }
+      #navbar li { display: inline; }
+      #navbar a {
+        color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        width: 300px;
+      }
+      #navbar a:hover {
+        border-radius: 20px 5px;
+        background-color: rgba(72, 72, 70, 0.8);
+      }
+      label {float:left;padding-right:10px;padding-left: 10px;}
+      button {margin-left: 100px;}
+      .field {clear:both; text-align:right;line-height:25px;}
+      .main {float:left}
+    </style>
+
+  </head>
+
+  <body>
+
+    <ul id="navbar">
+      {% if username %}
+      <li><a  href="/auth/logout/">Выйти ({{ username }})</a></li>
+      {% else %}
+      <li><a href="/auth/login/">Войти</a></li>
+      {% endif %}
+      <li><a href="/">Иной тип расчета</a></li>
+      <li><a href="/">История расчетов</a></li>
+    </ul>
+{% block login %}{% endblock %}
+  {% if username %}
+    <div class="main">
+    <div class="field">
+        <br>
+    <label> {{ path }} </label>
+    <br>
+    <label> Номер выбранного набора данных в файле TPS </label>
+     <select>
+       {% for type in types %}
+       <option>{{ type }}</option>
+       {% endfor %}
+     </select>
+    </div>
+    <div class="field">
+    <label> Номер выбранного набора данных в файле VSP </label>
+     <select>
+       {% for type in types %}
+       <option>{{ type }}</option>
+       {% endfor %}
+     </select>
+    </div>
+     <div class="field">
+    <label> Номер выбранного набора данных в файле SPKH </label>
+     <select>
+       {% for type in types %}
+       <option>{{ type }}</option>
+       {% endfor %}
+     </select>
+     </div>
+      <div class="field">
+    <label> Номер выбранного набора данных в файле SPKV </label>
+     <select>
+       {% for type in types %}
+       <option>{{ type }}</option>
+       {% endfor %}
+     </select>
+      </div>
+    <div class="field">
+       <label>Скорость движения, м/с </label>
+       <input type="text" name="c1">
+    </div>
+      <div class="field">
+       <label> Радиус кривой, м </label>
+       <input type="text" name="c2">
+      </div>
+      <div class="field">
+       <label> Расстояние между кругами катания, м </label>
+       <input type="text" name="c3">
+      </div>
+      <div class="field">
+       <label> Возвышение наружного рельса, м </label>
+       <input type="text" name="c4">
+      </div>
+      <div class="field">
+       <label> Коэффициент Крипа, тс/м </label>
+       <input type="text" name="c5">
+      </div>
+      <div class="field">
+       <label> Горизонтальная жесткость пути, тс/м </label>
+       <input type="text" name="c6">
+      </div>
+      <div class="field">
+       <label> Половина ширины зазора в колее </label>
+       <input type="text" name="c7">
+      </div>
+      <div class="field">
+       <label> Угловой коэффициент </label>
+       <input type="text" name="c8">
+      </div>
+      <div class="field">
+       <label> Соотношение коэффициентов Крипа </label>
+       <input type="text" name="c9">
+      </div>
+      <div class="field">
+    <form action="/testpage/res/" method="GET">
+	<button type="submit" >Подсчет результата</button>
+</form>
+                  <form action="/pdf/crt" method="GET">
+	    <button type="submit" >PDF</button></form>
+    </div>
+    </div>
+     {% endif %}
+  </body>
+</html>

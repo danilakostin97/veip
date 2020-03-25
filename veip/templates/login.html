@@ -1,0 +1,25 @@
+{% extends 'test.html' %}
+
+{% block login %}
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <div class="large-offset-3 large-6 columns">
+        <form action="/auth/login/" method="post">
+            {% csrf_token %}
+            <div class="user">
+                <label for="username">Name</label>
+                <input type="text" name="username" id="username">
+            </div>
+           <div class="pass">
+                <label for="password">Pass</label>
+                <input type="password" name="password" id="password">
+           </div>
+
+            {% if login_error %}
+                <label class="error">{{ login_error }}</label>
+            {% endif %}
+            <input class="button" type="submit" value="Войти">
+        </form>
+    </div>
+{% endblock %}

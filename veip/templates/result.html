@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Результат</title>
+    <style>
+        body {
+  background-image: url("{% static '26.jpg' %}") ;
+}
+      label {float:left;padding-right:10px;padding-left: 20px;}
+      button {margin-left: 100px;}
+      .field {clear:both; text-align:right;line-height:25px;}
+      .main {float:left}
+    </style>
+
+  </head>
+
+  <body>
+
+{% block login %}{% endblock %}
+  {% if username %}
+    <div class="main">
+    <div class="field">
+    <br>
+        <label>Результаты подсчета пользователем {{ username }}</label>
+        <label> {{ v1 }} </label>
+        <br>
+        <label>Начальные данные</label>
+        <br>
+    <label> Номер выбранного набора данных в файле TPS </label>
+    </div>
+    <div class="field">
+    <label> Номер выбранного набора данных в файле VSP </label>
+    </div>
+     <div class="field">
+    <label> Номер выбранного набора данных в файле SPKH </label>
+     </div>
+      <div class="field">
+    <label> Номер выбранного набора данных в файле SPKV </label>
+      </div>
+    <div class="field">
+       <label>Скорость движения, м/с </label>
+    </div>
+      <div class="field">
+       <label> Радиус кривой, м </label>
+      </div>
+      <div class="field">
+       <label> Расстояние между кругами катания, м </label>
+      </div>
+      <div class="field">
+       <label> Возвышение наружного рельса, м </label>
+      </div>
+      <div class="field">
+       <label> Коэффициент Крипа, тс/м </label>
+      </div>
+      <div class="field">
+       <label> Горизонтальная жесткость пути, тс/м </label>
+      </div>
+      <div class="field">
+       <label> Половина ширины зазора в колее </label>
+      </div>
+      <div class="field">
+       <label> Угловой коэффициент </label>
+      </div>
+      <div class="field">
+       <label> Соотношение коэффициентов Крипа </label>
+      </div>
+      <div class="field">
+    <form action="/auth/logout/" method="GET">
+	<button type="submit" >Кнопка</button>
+</form>
+    </div>
+    </div>
+<canvas id="myChart"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script src="{% static 'graph1.js'  %}"></script>
+     {% endif %}
+  </body>
+</html>

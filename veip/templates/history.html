@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<style>
+   ul li {
+        display: inline;
+        padding: 10px;
+       float: left;
+}
+      /*    .field {clear:both; text-align:right;line-height:25px;}*/
+      /*.input_data {float:left}*/
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header row">
+            <a href="/testpage/test" class="navbar-brand col-md-1">ВЭИП 2.0</a>
+        </div>
+        <div class="col-md-11">
+            <ul class="list-inline">
+                <li class="active"><a href="#">Расчеты</a></li>
+                <li><a href="#">История расчетов</a></li>
+                <li><a href="#">Теория</a></li>
+                <li><a href="#">Изменить данные</a></li>
+                {% if username %}
+                <li><a  href="/auth/logout/">Выйти ({{ username }})</a></li>
+                {% else %}
+                <li><a href="/auth/login/">Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<label>{{ number }}</label>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Логин</th>
+        <th>Тип поезда</th>
+        <th>Тип пути</th>
+        <th>Скорость м/с</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for num,speed in number %}
+   <form action="/testpage/rsult" method="post">
+{% csrf_token %}
+        <tr>
+            <th>{{ num }}</th>
+            <th>{{ username }}</th>
+            <th>train</th>
+            <th> rails <input name="rails" value="{{ num }}" type="hidden"></th>
+            <th>{{ speed }}</th>
+
+            <th><button type="submit" >Результат</button></th>
+        </tr>
+    </form>
+
+    {% endfor %}
+    </tbody>
+
+</table>
+</body>
+</html>
