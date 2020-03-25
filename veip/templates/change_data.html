@@ -68,6 +68,11 @@
  padding: 30px;
  margin: 0;
 }
+#accordion .panel-body label{
+ font-size: 14px;
+ color: #fff;
+
+}
 #accordion .panel-collapse .panel-body p{
  opacity: 0;
  transform: scale(0.9);
@@ -82,6 +87,9 @@
         padding: 10px;
        float: left;
 }
+    .field {clear:both; text-align:right; padding-left: 10%; padding-right: 10%}
+label {float:left; }
+.main_inp {float:left; width:100%;}
 </style>
 
 </head>
@@ -109,8 +117,8 @@
 <div class="container-fluid">
 <div class="row">
 
- <div>
- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+ <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:100%;">
 
  <div class="panel panel-default">
  <div class="panel-heading" role="tab" id="headingOne">
@@ -120,9 +128,114 @@
  </a>
  </h4>
  </div>
- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+ <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" >
  <div class="panel-body">
- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+     <div class="main_inp">
+         <form action="/testpage/change_ТРS" method="post">
+{% csrf_token %}
+     <div class="field">
+          <label>Наименование подвижного состава</label>
+          <input type="text" name="t">
+     </div>
+     <div class="field">
+           <label>Жесткость поперечной связи между колесной парой и тележкой, кН/м</label>
+           <input type="text" name="ek1">
+     </div>
+     <div class="field">
+         <label>Жесткость поперечной связи между кузовом и тележкой, кН/м</label>
+         <input type="text" name="ek2">
+     </div>
+     <div class="field">
+         <label>Жесткость надбуксовой ступени подвешивания, кН/м</label>
+         <input type="text" name="ek3">
+     </div>
+     <div class="field">
+           <label>Жесткость центральной ступени подвешивания, кН/м</label>
+           <input type="text" name="ek4">
+     </div>
+     <div class="field">
+         <label>Угловая жесткость поворота колесной пары относительно тележки, кН*м</label>
+         <input type="text" name="ek5">
+     </div>
+     <div class="field">
+         <label>Угловая жесткость поворота тележки относительно кузова,кН*м</label>
+         <input type="text" name="ek6">
+     </div>
+     <div class="field">
+           <label>Масса колесной пары, кг</label>
+           <input type="text" name="ek7">
+     </div>
+     <div class="field">
+         <label>Масса рамы тележки, кг</label>
+         <input type="text" name="ek8">
+     </div>
+     <div class="field">
+         <label>Масса рамы тележки, кг</label>
+         <input type="text" name="ek9">
+     </div>
+     <div class="field">
+           <label>Статическая нагрузка на колесо, кН</label>
+           <input type="text" name="ek10">
+     </div>
+     <div class="field">
+         <label>Эффективная конусность бандажа</label>
+         <input type="text" name="ek11">
+     </div>
+     <div class="field">
+         <label>Радиус колеса, м</label>
+         <input type="text" name="ek12">
+     </div>
+     <div class="field">
+           <label>Расстояние от центра качаний до центра масс кузова,м</label>
+           <input type="text" name="ek13">
+     </div>
+     <div class="field">
+         <label>Половина поперечного расстояния между рессорными комплектами,м</label>
+         <input type="text" name="ek14">
+     </div>
+     <div class="field">
+         <label>Центральный момент инерции колесной пары относительно вертикальной оси, кг*m**2</label>
+         <input type="text" name="ek15">
+     </div>
+     <div class="field">
+           <label>Центральный момент инерции рамы тележки относительно вертикальной оси, кг*m**2</label>
+           <input type="text" name="ek16">
+     </div>
+     <div class="field">
+         <label>Центральный момент инерции рамы тележки относительно горизонтальной поперечной оси, кг*m**2</label>
+         <input type="text" name="ek17">
+     </div>
+     <div class="field">
+         <label>Центральный момент инерции кузова относительно вертикальной оси, кг*m**2</label>
+         <input type="text" name="ek18">
+     </div>
+     <div class="field">
+           <label>Центральный момент инерции относительно горизонтальной продольной оси, кг*m**2</label>
+           <input type="text" name="ek19">
+     </div>
+     <div class="field">
+         <label>Центральный момент инерции относительно горизонтальной-поперечной оси, кг*m**2</label>
+         <input type="text" name="ek20">
+     </div>
+     <div class="field">
+         <label>Коэффициент демпфирования поперечной связи тележки с кузовом, кН*c/m</label>
+         <input type="text" name="ek21">
+     </div>
+     <div class="field">
+           <label>Коэффициент демпфирования в надбуксовой ступени подвешивания, кН*c/m</label>
+           <input type="text" name="ek22">
+     </div>
+     <div class="field">
+         <label>Коэффициент демпфирования в центральной ступени подвешивания, кН*c/m</label>
+         <input type="text" name="ek23">
+     </div>
+     <div class="field">
+         <label>Коэффициент углового демпфирования при повороте тележки относительно кузова</label>
+         <input type="text" name="ek24">
+     </div>
+    </form>
+     </div>
+
  </div>
  </div>
  </div>
@@ -173,7 +286,6 @@
  </div>
  </div>
 
- </div>
  </div>
 
 </div><!-- ./row -->
