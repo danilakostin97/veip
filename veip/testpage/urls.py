@@ -11,4 +11,7 @@ urlpatterns = [
     url(r'^history', views.history),
     url(r'^rsult',views.resset),
     url(r'^change',views.change),
+    url(r'^calculations', views.calculations),
+    url(r'^theory', views.theory),
+
 ]

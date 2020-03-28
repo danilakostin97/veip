@@ -20,6 +20,16 @@ def newd(request):
     data = {"username": request.user.username,  }
     return render(request, "app.html", context=data)
 
+def calculations(request):
+    if request.user.is_authenticated:
+        data = {"username": request.user.username, }
+        return render(request,"calc.html", context=data)
+
+def theory(request):
+    if request.user.is_authenticated:
+        data = {"username": request.user.username, }
+        return render(request,"theory.html", context=data)
+
 def history(request):
     if request.user.is_authenticated:
         number = [["1", "2"], ["2", "3"]]

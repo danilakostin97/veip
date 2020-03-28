@@ -36,6 +36,6 @@ def logout(request):
 
 def checkauth(request):
     if request.user.is_authenticated:
-        return redirect('/testpage')
+        return redirect('/testpage/test')
     else:
         return redirect('/auth/login')
