@@ -9,31 +9,260 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
+    <style>
+        .name_table{ text-align: center}
+    </style>
 </head>
 <body>
-<label>{{ number }}</label>
 <input id="arr" type="hidden" value="{{ number }}">
+
+
 <div class="container-fluid">
     <div class="row">
-         <table class="table col-md-6">
+         <table class="table col-md-3">
         <thead>
         <tr>
-            <th>Номер оси</th>
+            <th colspan="3" class="name_table">p</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
             <th>Среднее значение</th>
             <th>Среднеквадратичное отклонение</th>
         </tr>
         </thead>
         <tbody>
+        {% for n,m,s in p %}
         <tr>
-            <th>1</th>
-            <th><input id="mato" value="-2" type="hidden"> -2</th>
-            <th><input id="sko" value="0.5" type="hidden">0.5</th>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
         </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="col-md-1"></div>
+     <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">onapr</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in onapr %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
         </tbody>
     </table>
-    <canvas class="col-md-6" id="myChart"></canvas>
+    <div class="col-md-1"></div>
+
+    <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">y</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in y %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   {% comment %} <canvas class="col-md-6" id="myChart"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-    <script  src="{% static 'graph1.js'  %}"></script>
+    <script  src="{% static 'graph1.js'  %}"></script>{% endcomment %}
+    </div>
+
+    <div class="row">
+         <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">q</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in q %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="col-md-1"></div>
+     <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">ball</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in ball %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-md-1"></div>
+
+    <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">opzp</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in opzp %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   {% comment %} <canvas class="col-md-6" id="myChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script  src="{% static 'graph1.js'  %}"></script>{% endcomment %}
+    </div>
+
+    <div class="row">
+         <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">aksr</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in aksr %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="col-md-1"></div>
+     <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">akss</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in akss %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-md-1"></div>
+
+    <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">aksb</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in aksb %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   {% comment %} <canvas class="col-md-6" id="myChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script  src="{% static 'graph1.js'  %}"></script>{% endcomment %}
+    </div>
+    <div class="row">
+         <table class="table col-md-3">
+        <thead>
+        <tr>
+            <th colspan="3" class="name_table">vzs</th>
+        </tr>
+        <tr>
+            <th>Номер оси </th>
+            <th>Среднее значение</th>
+            <th>Среднеквадратичное отклонение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for n,m,s in vzs %}
+        <tr>
+            <th>{{n}}</th>
+            <th><input value="-2" type="hidden">{{m}}</th>
+            <th><input value="0.5" type="hidden">{{s}}</th>
+        </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <div class="col-md-1"></div>
+   {% comment %} <canvas class="col-md-6" id="myChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script  src="{% static 'graph1.js'  %}"></script>{% endcomment %}
     </div>
 
 
