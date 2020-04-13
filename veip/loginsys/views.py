@@ -14,7 +14,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('/testpage/test')
+            return redirect('/testpage/calculations')
         else:
             data = 'User not found'
 
@@ -36,6 +36,6 @@ def logout(request):
 
 def checkauth(request):
     if request.user.is_authenticated:
-        return redirect('/testpage/test')
+        return redirect('/testpage/calculations')
     else:
         return redirect('/auth/login')
