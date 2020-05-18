@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(61914508, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/61914508" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Расчеты</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -137,7 +152,7 @@
        <div class="input_data">
         <div class="field">
     <label> Номер выбранного набора данных в файле TPS </label>
-     <select>
+     <select name="tps" id="tps">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -145,7 +160,7 @@
     </div>
        <div class="field">
     <label> Номер выбранного набора данных в файле VSP </label>
-     <select>
+     <select name="vsp" id="vsp">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -153,7 +168,7 @@
     </div>
      <div class="field">
     <label> Номер выбранного набора данных в файле SPKH </label>
-     <select>
+     <select name="spkh" id="spkh">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -161,7 +176,7 @@
      </div>
        <div class="field">
     <label> Номер выбранного набора данных в файле SPKV </label>
-     <select>
+     <select name="spkv" id="spkv">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -169,39 +184,39 @@
       </div>
       <div class="field">
        <label> Радиус кривой, м </label>
-       <input type="text" name="c2">
+       <input type="number" step="any" name="rk" id="rk">
       </div>
       <div class="field">
        <label> Расстояние между кругами катания, м </label>
-       <input type="text" name="c3">
+       <input ttype="number" step="any" name="rmk" id="rmk">
       </div>
        <div class="field">
        <label> Возвышение наружного рельса, м </label>
-       <input type="text" name="c4">
+       <input type="number" step="any" name="voz" id="voz">
       </div>
       <div class="field">
        <label> Коэффициент Крипа, тс/м </label>
-       <input type="text" name="c5">
+       <input type="number" step="any" name="krip" id="krip">
       </div>
       <div class="field">
        <label> Горизонтальная жесткость пути, тс/м </label>
-       <input type="text" name="c6">
+       <input type="number" step="any" name="gor" id="gor">
       </div>
       <div class="field">
        <label> Половина ширины зазора в колее </label>
-       <input type="text" name="c7">
+       <input type="number" step="any" name="pol" id="pol">
       </div>
         <div class="field">
        <label> Угловой коэффициент </label>
-       <input type="text" name="c8">
+       <input type="number" step="any" name="ugl" id="ugl">
       </div>
       <div class="field">
        <label> Соотношение коэффициентов Крипа </label>
-       <input type="text" name="c9">
+       <input type="number" step="any" name="skrip" id="skrip">
       </div>
     <div class="field">
        <label>Скорость движения, м/с </label>
-       <input type="text" name="c1">
+       <input type="number" step="any" name="speed" id="speed">
     </div>
 </div>
        <button type="submit"  class="button">Рассчитать</button>
@@ -227,7 +242,7 @@
        <div class="input_data">
         <div class="field">
     <label> Номер выбранного набора данных в файле TPS </label>
-     <select>
+     <select name="tps" id="tpsm">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -235,7 +250,7 @@
     </div>
        <div class="field">
     <label> Номер выбранного набора данных в файле VSP </label>
-     <select>
+     <select name="vsp" id="vspm">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -243,7 +258,7 @@
     </div>
      <div class="field">
     <label> Номер выбранного набора данных в файле SPKH </label>
-     <select>
+     <select name="spkh" id="spkh">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -251,7 +266,7 @@
      </div>
        <div class="field">
     <label> Номер выбранного набора данных в файле SPKV </label>
-     <select>
+     <select name="spkv" id="spkv">
        {% for type in types %}
        <option>{{ type }}</option>
        {% endfor %}
@@ -259,44 +274,44 @@
       </div>
       <div class="field">
        <label> Радиус кривой, м </label>
-       <input type="text" name="c2">
+       <input type="number" step="any" name="rk" id="rkm">
       </div>
       <div class="field">
        <label> Расстояние между кругами катания, м </label>
-       <input type="text" name="c3">
+       <input type="number" step="any" name="rmk" id="rmkm">
       </div>
        <div class="field">
        <label> Возвышение наружного рельса, м </label>
-       <input type="text" name="c4">
+       <input type="number" step="any" name="voz" id="vozm">
       </div>
       <div class="field">
        <label> Коэффициент Крипа, тс/м </label>
-       <input type="text" name="c5">
+       <input type="number" step="any" name="krip" id="kripm">
       </div>
       <div class="field">
        <label> Горизонтальная жесткость пути, тс/м </label>
-       <input type="text" name="c6">
+       <input type="number" step="any" name="gor" id="gorm">
       </div>
       <div class="field">
        <label> Половина ширины зазора в колее </label>
-       <input type="text" name="c7">
+       <input type="number" step="any" name="pol" id="polm">
       </div>
         <div class="field">
        <label> Угловой коэффициент </label>
-       <input type="text" name="c8">
+       <input type="number" step="any" name="ugl" id="uglm">
       </div>
       <div class="field">
        <label> Соотношение коэффициентов Крипа </label>
-       <input type="text" name="c9">
+       <input type="number" step="any" name="skrip" id="skripm">
       </div>
 
     <div class="field">
        <label>Диапазон скорости движения, м/с от </label>
-       <input type="text" name="c2">
+       <input type="number" step="any" name="speedl" id="speedl">
     </div>
        <div class="field">
             <label> до </label>
-        <input type="text" name="c3">
+        <input type="number" step="any" name="speedh" id="speedh">
         </div>
 </div>
        <button type="submit"  class="button">Рассчитать</button>
@@ -309,6 +324,44 @@
  </div>
 
 </div><!-- ./row -->
+<div class="row">
+<table class="table">
+{#    <thead>#}
+{#    <tr>#}
+{#        <th>ID</th>#}
+{#        <th>Логин</th>#}
+{#        <th>Тип поезда</th>#}
+{#        <th>Тип пути</th>#}
+{#        <th>Скорость м/с</th>#}
+{#        <th></th>#}
+{#    </tr>#}
+{#    </thead>#}
+    <tbody>
+    {% for tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed, status in inputdata %}
+   <form action="/testpage/viewres" method="post">
+{% csrf_token %}
+        <tr>
+            <th>{{ tps }}<input name="tps" value="{{ tps }}" type="hidden"></th>
+            <th>{{ vsp }}<input name="vsp" value="{{ vsp }}" type="hidden"></th>
+            <th>{{ spkh }}<input name="spkh" value="{{ spkh }}" type="hidden"></th>
+            <th>{{ spkv }}<input name="spkv" value="{{ spkv }}" type="hidden"></th>
+            <th>{{ rk }}<input name="rk" value="{{ rk }}" type="hidden"></th>
+            <th>{{ rmk }}<input name="rmk" value="{{ rmk }}" type="hidden"></th>
+            <th>{{ voz }}<input name="voz" value="{{ voz }}" type="hidden"></th>
+            <th>{{ krip }}<input name="krip" value="{{ krip }}" type="hidden"></th>
+            <th>{{ gor }}<input name="gor" value="{{ gor }}" type="hidden"></th>
+            <th>{{ pol }}<input name="pol" value="{{ pol }}" type="hidden"></th>
+            <th>{{ ugl }}<input name="ugl" value="{{ ugl }}" type="hidden"></th>
+            <th>{{ skrip }}<input name="skrip" value="{{ skrip }}" type="hidden"></th>
+            <th>{{ speed }}<input name="speed" value="{{ speed }}" type="hidden"></th>
+            <th>{{ status }}</th>
+            <th><button type="submit" >Результат</button></th>
+        </tr>
+    </form>
+
+    {% endfor %}
+    </tbody>
+</div>
 </div><!-- ./container -->
 </body>
 </html>

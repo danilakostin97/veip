@@ -204,7 +204,7 @@ class cput():
         text1=[]        # Файл, разбитый по 10 символов в строке
         an2=[]
 
-        with open('/home/danila/PycharmProjects/vkr2-master/veip/testpage/middle','r') as file:
+        with open('/home/danila/PycharmProjects/vkr2-master/veip/testpage/middle','r') as file: #/home/dany/veipButt/veip/veip/testpage/
             text=file.readlines()
             for line in text:
                 text1.append([line[i:i + 10] for i in range(0, len(line[:-1]), 10)])
@@ -626,7 +626,7 @@ class cput():
             vz[k]=np.sqrt(abs(vz[k]))
 
         # Вывод результатов в файл
-        with open('output_st1.txt', 'w') as file:
+        with open('output_st1.txt', 'w') as file: #/home/dany/veipButt/veip/veip/testpage/
             file.write('ХАРАКТЕРИСТИКИ ПУТИ\n')
             for item in self.put[:10]:
                 file.write("% .3e " % item)
@@ -667,7 +667,7 @@ class cput():
             for i in range(self.n1):
                 file.write("{0: .3e} {1: .3e}\n".format(vzs3[i],vzs[i]))
 
-        with open('put.ekp','w') as file:
+        with open('put.ekp','w') as file: #/home/dany/veipButt/veip/veip/testpage/
             if self.n1!=8:
                 file.write("{0:>4}{1:>4}\n".format(iekip,n8))
             for item in vo3[:8]:
@@ -702,7 +702,7 @@ class cput():
                             a+=len(tmp)
                             tmp.clear()
 
-        with open('output_st1.txt', 'w') as file:
+        with open('output_st1.txt', 'w') as file: #/home/dany/veipButt/veip/veip/testpage/
             file.write('p ' + str(vp3[:self.n1])+'\n')
             file.write('p ' + str(vp[:self.n1])+'\n')
             file.write('onapr ' + str(vm3[:self.n1])+'\n')
