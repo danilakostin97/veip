@@ -31,11 +31,11 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/testpage')
+    return redirect('/')
 
 
 def checkauth(request):
     if request.user.is_authenticated:
         return redirect('/testpage/calculations')
     else:
-        return redirect('/auth/login')
+        return redirect('/testpage/theory')

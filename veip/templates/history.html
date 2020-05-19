@@ -54,36 +54,45 @@
     </div>
 </nav>
 <label>{{ number }}</label>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Логин</th>
-        <th>Тип поезда</th>
-        <th>Тип пути</th>
-        <th>Скорость м/с</th>
-        <th></th>
-    </tr>
-    </thead>
+<div class="container-fluid">
+    <div class="row">
+        <table class="table">
+{#    <thead>#}
+{#    <tr>#}
+{#        <th>ID</th>#}
+{#        <th>Логин</th>#}
+{#        <th>Тип поезда</th>#}
+{#        <th>Тип пути</th>#}
+{#        <th>Скорость м/с</th>#}
+{#        <th></th>#}
+{#    </tr>#}
+{#    </thead>#}
     <tbody>
-    {% for num,speed in number %}
-   <form action="/testpage/rsult" method="post">
+    {% for tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed, status in inputdata %}
+   <form action="/testpage/viewres" method="post">
 {% csrf_token %}
         <tr>
-            <th>{{ num }}</th>
-            <th>{{ username }}</th>
-            <th>train</th>
-            <th> rails <input name="rails" value="{{ num }}" type="hidden"></th>
-            <th>{{ speed }}</th>
-
+            <th>{{ tps }}<input name="tps" value="{{ tps }}" type="hidden"></th>
+            <th>{{ vsp }}<input name="vsp" value="{{ vsp }}" type="hidden"></th>
+            <th>{{ spkh }}<input name="spkh" value="{{ spkh }}" type="hidden"></th>
+            <th>{{ spkv }}<input name="spkv" value="{{ spkv }}" type="hidden"></th>
+            <th>{{ rk }}<input name="rk" value="{{ rk }}" type="hidden"></th>
+            <th>{{ rmk }}<input name="rmk" value="{{ rmk }}" type="hidden"></th>
+            <th>{{ voz }}<input name="voz" value="{{ voz }}" type="hidden"></th>
+            <th>{{ krip }}<input name="krip" value="{{ krip }}" type="hidden"></th>
+            <th>{{ gor }}<input name="gor" value="{{ gor }}" type="hidden"></th>
+            <th>{{ pol }}<input name="pol" value="{{ pol }}" type="hidden"></th>
+            <th>{{ ugl }}<input name="ugl" value="{{ ugl }}" type="hidden"></th>
+            <th>{{ skrip }}<input name="skrip" value="{{ skrip }}" type="hidden"></th>
+            <th>{{ speed }}<input name="speed" value="{{ speed }}" type="hidden"></th>
+            <th>{{ status }}</th>
             <th><button type="submit" >Результат</button></th>
         </tr>
     </form>
 
     {% endfor %}
     </tbody>
-
-</table>
+    </div>
+</div>
 </body>
 </html>

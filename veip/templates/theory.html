@@ -117,13 +117,17 @@
         </div>
         <div class="col-md-11">
             <ul class="list-inline">
+            {% if username %}
                 <li class="active"><a href="/testpage/calculations">Расчеты</a></li>
                 <li><a href="/testpage/history">История расчетов</a></li>
                 <li><a href="#">Теория</a></li>
                 <li><a href="/testpage/change">Изменить данные</a></li>
-                {% if username %}
                 <li><a  href="/auth/logout/">Выйти ({{ username }})</a></li>
                 {% else %}
+                <li class="active"><a href="#">Расчеты</a></li>
+                <li><a href="#">История расчетов</a></li>
+                <li><a href="#">Теория</a></li>
+                <li><a href="#">Изменить данные</a></li>
                 <li><a href="/auth/login/">Войти</a></li>
                 {% endif %}
             </ul>

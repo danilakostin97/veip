@@ -13,22 +13,36 @@ def newd(request):
     data = {"username": request.user.username,  }
     return render(request, "app.html", context=data)
 
+def getHistory():
+    dataInput=[[]]
+    #SQL ПОЛУЧИТЬ ПО СТРОКАМ ВХОДНЫЕ ДАННЫЕ
+    return dataInput
+
 def calculations(request):
     if request.user.is_authenticated:
+        #test
         inputdata=[["Vag","on","ed","et",5,6,7,8,9,10,11,12,13,"Готово"]]
         inputdata.append(["Pri", "exal", "vag", "on",15,16,17,18,19,20,21,22,"60..90", "В работе"])
+        #
+        #inputdata=getHistory()
         data = {"username": request.user.username, "inputdata":inputdata, }
         return render(request,"calculations.html", context=data)
 
 def theory(request):
-    if request.user.is_authenticated:
-        data = {"username": request.user.username, }
-        return render(request,"theory.html", context=data)
+    data = {"username": request.user.username, }
+    return render(request, "theory.html", context=data)
+    # if request.user.is_authenticated:
+    #     data = {"username": request.user.username, }
+    #     return render(request,"theory.html", context=data)
 
 def history(request):
     if request.user.is_authenticated:
-        number = [["1", "2"], ["2", "3"]]
-        data = {"username": request.user.username,"number":number, }
+        # test
+        inputdata = [["Vag", "on", "ed", "et", 5, 6, 7, 8, 9, 10, 11, 12, 13, "Готово"]]
+        inputdata.append(["Pri", "exal", "vag", "on", 15, 16, 17, 18, 19, 20, 21, 22, "60..90", "В работе"])
+        #
+        #inputdata=getHistory()
+        data = {"username": request.user.username, "inputdata": inputdata, }
         return render(request,"history.html", context=data)
 
 def arrset(k,par):
@@ -63,35 +77,25 @@ def resset(request):
         speed = request.POST.get('speed')
     print(request.POST)
     print(tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed)
-    # rails = request.POST.get('rails', '')
-    # param = veip_params.cput()
-    # arrres = param.putm()
-    # number = [["1", "2"], ["2", "3"]]
-    # number = json.dumps(number)
-    # print(arrres[0])
-    # p=arrset(0,arrres)
-    # print("done")
-    # onapr=arrset(2,arrres)
-    # print("done")
-    # y=arrset(4,arrres)
-    # print("done")
-    # q=arrset(6,arrres)
-    # print("done")
-    # ball=arrset(8,arrres)
-    # print("done")
-    # opzp=arrset(10,arrres)
-    # print("done")
-    # aksr=arrset(12,arrres)
-    # print("done")
-    # akss=arrset(14,arrres)
-    # print("done")
-    # aksb=arrset(16,arrres)
-    # print("done")
-    # vzs=arrset(18,arrres)
-    # print("done")
-    # data={"speed":rails, "number":number, "list":list, "p":p, "onapr":onapr, "y":y, "q":q, "ball":ball, "opzp":opzp, "aksr":aksr, "akss":akss, "aksb":aksb, "vzs":vzs }
+    rails = request.POST.get('rails', '')
+    param = veip_params.cput()
+    arrres = param.putm()
+    number = [["1", "2"], ["2", "3"]]
+    number = json.dumps(number)
+    print(arrres[0])
+    p=arrset(0,arrres)
+    onapr=arrset(2,arrres)
+    y=arrset(4,arrres)
+    q=arrset(6,arrres)
+    ball=arrset(8,arrres)
+    opzp=arrset(10,arrres)
+    aksr=arrset(12,arrres)
+    akss=arrset(14,arrres)
+    aksb=arrset(16,arrres)
+    vzs=arrset(18,arrres)
+    data={"speed":rails, "number":number, "list":list, "p":p, "onapr":onapr, "y":y, "q":q, "ball":ball, "opzp":opzp, "aksr":aksr, "akss":akss, "aksb":aksb, "vzs":vzs }
     # # render(request, "restest.html", context=data), context=data
-    data={"tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "rk":rk, "rmk":rmk, "voz":voz, "krip":krip, "gor":gor, "pol":pol, "ugl":ugl, "skrip":skrip, "speed":speed}
+    #data={"tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "rk":rk, "rmk":rmk, "voz":voz, "krip":krip, "gor":gor, "pol":pol, "ugl":ugl, "skrip":skrip, "speed":speed}
     return render(request,"restest.html", context=data)
 
 
@@ -112,7 +116,9 @@ def multires(request):
         pol = request.POST.get('pol')
         ugl = request.POST.get('ugl')
         skrip = request.POST.get('skrip')
-        speed = request.POST.get('speed')
+        speedl = request.POST.get('speedl')
+        speedh = request.POST.get('speedh')
+
     print(request.POST)
     rails = request.POST.get('rails', '')
     number = [1, 2]
