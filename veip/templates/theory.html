@@ -113,7 +113,11 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header row">
+            {% if username %}
             <a href="/testpage/calculations" class="navbar-brand col-md-1">ВЭИП 2.0</a>
+            {% else %}
+            <a href="#" class="navbar-brand col-md-1">ВЭИП 2.0</a>
+            {% endif %}
         </div>
         <div class="col-md-11">
             <ul class="list-inline">

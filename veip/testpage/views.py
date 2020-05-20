@@ -8,6 +8,8 @@ import datetime
 from xhtml2pdf import pisa
 from django.template.context_processors import csrf
 from . import veip_params
+from string import digits
+
 
 def newd(request):
     data = {"username": request.user.username,  }
@@ -98,7 +100,40 @@ def resset(request):
     #data={"tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "rk":rk, "rmk":rmk, "voz":voz, "krip":krip, "gor":gor, "pol":pol, "ugl":ugl, "skrip":skrip, "speed":speed}
     return render(request,"restest.html", context=data)
 
-
+def viewresult(request):
+    # sql poisk rezultata
+    s = request.POST.get('speed')
+    remove_digits = str.maketrans('', '', digits)
+    res = s.translate(remove_digits)
+    if res:
+        p = [[1, 0.02, 0.03, 60], [2, 0.201, 0.045, 60], [3, 0.02556, 0.005, 60], [4, 0.546, 0.02, 60]]
+        onapr = [[1, 0.2, 0.02, 60], [2, 0.0201, 0.0045, 60], [3, 0.56, 0.05, 60], [4, 0.546, 0.02, 60]]
+        y = [[1, 0.211, 0.025, 60], [2, 0.201, 0.045, 60], [3, 0.67, 0.25, 60], [4, 0.689, 0.2, 60]]
+        ball = [[1, 0.3, 0.03, 60], [2, 0.31, 0.05, 60], [3, 0.756, 0.163, 60], [4, 0.946, 0.02, 60]]
+        opzp = [[1, 0.21, 0.02, 60], [2, 0.201, 0.045, 60], [3, 0.156, 0.0075, 60], [4, 0.846, 0.12, 60]]
+        aksr = [[1, 0.72, 0.2, 60], [2, 0.9201, 0.045, 60], [3, 0.564, 0.05, 60], [4, 0.526, 0.02, 60]]
+        akss = [[1, 0.2, 0.02, 60], [2, 0.0201, 0.0045, 60], [3, 0.56, 0.05, 60], [4, 0.546, 0.02, 60]]
+        aksb = [[1, 0.211, 0.025, 60], [2, 0.201, 0.045, 60], [3, 0.67, 0.25, 60], [4, 0.689, 0.2, 60]]
+        vzs = [[1, 0.21, 0.02, 60], [2, 0.201, 0.045, 60], [3, 0.156, 0.0075, 60], [4, 0.846, 0.12, 60]]
+        q = [[1, 0.72, 0.2, 60], [2, 0.9201, 0.045, 60], [3, 0.564, 0.05, 60], [4, 0.526, 0.02, 60]]
+        datasolo = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
+                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+        return render(request,"multires.html", context=datasolo)
+    else:
+        print(res)
+        p = [[1, 0.02, 0.03], [2, 0.201, 0.045], [3, 0.02556, 0.005], [4, 0.546, 0.02]]
+        onapr = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
+        y = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
+        ball = [[1, 0.3, 0.03], [2, 0.31, 0.05], [3, 0.756, 0.163], [4, 0.946, 0.02]]
+        opzp = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
+        aksr = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+        akss = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
+        aksb = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
+        vzs = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
+        q = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+        data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
+                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+        return render(request,"restest.html", context=data)
 
 def multires(request):
     args = {}
@@ -187,6 +222,6 @@ def call(request):
         return redirect('/auth/login')
 
 def change(request):
-
     data = {"username": request.user.username, }
     return render(request,"change_data.html", context=data)
+

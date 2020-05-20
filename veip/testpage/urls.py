@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^change',views.change),
     url(r'^calculations', views.calculations),
     url(r'^theory', views.theory),
+    url(r'^viewres', views.viewresult),
 
 
 ]
