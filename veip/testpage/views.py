@@ -8,7 +8,10 @@ import datetime
 from xhtml2pdf import pisa
 from django.template.context_processors import csrf
 from . import veip_params
+from . import veip_params1
 from string import digits
+import psycopg2
+
 
 
 def newd(request):
@@ -16,18 +19,51 @@ def newd(request):
     return render(request, "app.html", context=data)
 
 def getHistory():
-    dataInput=[[]]
-    #SQL ПОЛУЧИТЬ ПО СТРОКАМ ВХОДНЫЕ ДАННЫЕ
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute('''select * from "input"''')
+    dataInput = []
+    for row in cursor:
+        inp=[]
+        for i in range(0,17):
+            inp.append(row[i])
+        dataInput.append(inp)
+    print(dataInput)
     return dataInput
+
+
+def getDataFromCur(cursor):
+    arr=[]
+    for row in cursor:
+        arr.append(row[0])
+    return arr
 
 def calculations(request):
     if request.user.is_authenticated:
+        ### ПОДКЛЮЧЕНИЕ К БД ###
+
+        conn = psycopg2.connect(dbname='veip', user='postgres',
+                                password='postgres', host='localhost')
+        cursor = conn.cursor()
+        cursor.execute('''select "t(i)" from "TPS"''')
+        tps=getDataFromCur(cursor) #list(cursor.fetchall())
+        cursor.execute('''select "v(i)" from "VSP"''')
+        vsp=getDataFromCur(cursor)
+        cursor.execute('''select "name_spkh" from "SPKH"''')
+        spkh=getDataFromCur(cursor)
+        cursor.execute('''select "name_spkv" from "SPKV"''')
+        spkv = getDataFromCur(cursor)
+        cursor.execute('''select "name_ekip" from "EKIP"''')
+        ekip = getDataFromCur(cursor)
+        inputdata=getHistory()
         #test
-        inputdata=[["Vag","on","ed","et",5,6,7,8,9,10,11,12,13,"Готово"]]
-        inputdata.append(["Pri", "exal", "vag", "on",15,16,17,18,19,20,21,22,"60..90", "В работе"])
+
+        # inputdata=[["Vag","on","ed","et",5,6,7,8,9,10,11,12,13,"Готово"]]
+        # inputdata.append(["Pri", "exal", "vag", "on",15,16,17,18,19,20,21,22,"60..90", "В работе"])
         #
         #inputdata=getHistory()
-        data = {"username": request.user.username, "inputdata":inputdata, }
+        data = {"username": request.user.username, "inputdata":inputdata, "tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "ekip":ekip }
         return render(request,"calculations.html", context=data)
 
 def theory(request):
@@ -40,10 +76,10 @@ def theory(request):
 def history(request):
     if request.user.is_authenticated:
         # test
-        inputdata = [["Vag", "on", "ed", "et", 5, 6, 7, 8, 9, 10, 11, 12, 13, "Готово"]]
-        inputdata.append(["Pri", "exal", "vag", "on", 15, 16, 17, 18, 19, 20, 21, 22, "60..90", "В работе"])
+        # inputdata = [["Vag", "on", "ed", "et", 5, 6, 7, 8, 9, 10, 11, 12, 13, "Готово"]]
+        # inputdata.append(["Pri", "exal", "vag", "on", 15, 16, 17, 18, 19, 20, 21, 22, "60..90", "В работе"])
         #
-        #inputdata=getHistory()
+        inputdata=getHistory()
         data = {"username": request.user.username, "inputdata": inputdata, }
         return render(request,"history.html", context=data)
 
@@ -59,6 +95,22 @@ def arrset(k,par):
         i+=1
     return arr
 
+
+def getdata(arrres):
+    p = arrset(0, arrres)
+    onapr = arrset(2, arrres)
+    y = arrset(4, arrres)
+    q = arrset(6, arrres)
+    ball = arrset(8, arrres)
+    opzp = arrset(10, arrres)
+    aksr = arrset(12, arrres)
+    akss = arrset(14, arrres)
+    aksb = arrset(16, arrres)
+    vzs = arrset(18, arrres)
+    data = { "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball, "opzp": opzp,
+            "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+    return data
+
 def resset(request):
 
     args = {}
@@ -68,6 +120,7 @@ def resset(request):
         vsp = request.POST.get('vsp')
         spkh = request.POST.get('spkh')
         spkv = request.POST.get('spkv')
+        ekip = request.POST.get('ekip')
         rk = request.POST.get('rk')
         rmk = request.POST.get('rmk')
         voz = request.POST.get('voz')
@@ -77,28 +130,66 @@ def resset(request):
         ugl = request.POST.get('ugl')
         skrip = request.POST.get('skrip')
         speed = request.POST.get('speed')
+
+    ### ПОДКЛЮЧЕНИЕ К БД ###
+
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
     print(request.POST)
-    print(tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed)
-    rails = request.POST.get('rails', '')
-    param = veip_params.cput()
-    arrres = param.putm()
-    number = [["1", "2"], ["2", "3"]]
-    number = json.dumps(number)
-    print(arrres[0])
-    p=arrset(0,arrres)
-    onapr=arrset(2,arrres)
-    y=arrset(4,arrres)
-    q=arrset(6,arrres)
-    ball=arrset(8,arrres)
-    opzp=arrset(10,arrres)
-    aksr=arrset(12,arrres)
-    akss=arrset(14,arrres)
-    aksb=arrset(16,arrres)
-    vzs=arrset(18,arrres)
-    data={"speed":rails, "number":number, "list":list, "p":p, "onapr":onapr, "y":y, "q":q, "ball":ball, "opzp":opzp, "aksr":aksr, "akss":akss, "aksb":aksb, "vzs":vzs }
+    cursor.execute('''select "id" from "TPS" where "t(i)" ='%s';''' % tps)
+    id_tps= cursor.fetchone()[0]
+    cursor.execute('''select "id" from "VSP" where "v(i)" ='%s';''' % vsp)
+    id_vsp = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "SPKH" where "name_spkh" ='%s';''' % spkh)
+    id_spkh = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "SPKV" where "name_spkv" ='%s';''' % spkv)
+    id_spkv = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "EKIP" where "name_ekip" ='%s';''' % ekip)
+    id_ekip = cursor.fetchone()[0]
+    print(id_tps)
+    cursor.execute("""INSERT INTO "input" VALUES (default,%s,default,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING "id" """,
+                    ( request.user.username, id_tps, id_vsp, id_spkh, id_spkv, id_ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed))
+
+    print('DONEEEEEEEEEEEE')
+    id_of_new_row = cursor.fetchone()[0]
+    print(id_of_new_row)
+    conn.commit()
+    # staroe
+    #
+
+    params=veip_params1.cput()
+    params.start(cursor, id_of_new_row)
+
+    print('FINAL')
+    # print(request.POST)
+    # print(tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed)
+    # param = veip_params.cput()
+    # arrres = param.putm()
+    # data=getdata(arrres)
+
+    p = [[1, 0.02, 0.03], [2, 0.201, 0.045], [3, 0.02556, 0.005], [4, 0.546, 0.02]]
+    onapr = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
+    y = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
+    ball = [[1, 0.3, 0.03], [2, 0.31, 0.05], [3, 0.756, 0.163], [4, 0.946, 0.02]]
+    opzp = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
+    aksr = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+    akss = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
+    aksb = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
+    vzs = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
+    q = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+    data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
+            "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+    #data={"speed":rails, "list":list, "p":p, "onapr":onapr, "y":y, "q":q, "ball":ball, "opzp":opzp, "aksr":aksr, "akss":akss, "aksb":aksb, "vzs":vzs }
     # # render(request, "restest.html", context=data), context=data
     #data={"tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "rk":rk, "rmk":rmk, "voz":voz, "krip":krip, "gor":gor, "pol":pol, "ugl":ugl, "skrip":skrip, "speed":speed}
     return render(request,"restest.html", context=data)
+
+def createcalc(speed):
+
+    param = veip_params.cput()
+    arrres = param.putm()
+    return arrres
 
 def viewresult(request):
     # sql poisk rezultata
@@ -135,6 +226,40 @@ def viewresult(request):
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
         return render(request,"restest.html", context=data)
 
+def getDataMult(res1,res2,res3,res4,res5):
+    resAll=[[]]
+    p = []
+    onapr = []
+    y = []
+    q = []
+    ball = []
+    opzp = []
+    aksr = []
+    akss = []
+    aksb = []
+    vzs = []
+    resAll.append(res1)
+    resAll.append(res2)
+    resAll.append(res3)
+    resAll.append(res4)
+    resAll.append(res5)
+    x=0
+    for i in range(1,6):
+        p.append(arrset(0+x, resAll))
+        onapr.append(arrset(2+x, resAll))
+        y.append(arrset(4+x, resAll))
+        q.append(arrset(6+x, resAll))
+        ball.append(arrset(8+x, resAll))
+        opzp.append(arrset(10+x, resAll))
+        aksr.append(arrset(12+x, resAll))
+        akss.append(arrset(14+x, resAll))
+        aksb.append(arrset(16+x, resAll))
+        vzs.append(arrset(18+x, resAll))
+        x=x+20
+    data = { "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball, "opzp": opzp,
+            "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+    return data
+
 def multires(request):
     args = {}
     args.update(csrf(request))
@@ -153,6 +278,13 @@ def multires(request):
         skrip = request.POST.get('skrip')
         speedl = request.POST.get('speedl')
         speedh = request.POST.get('speedh')
+    #vstavka zaneseniya v bd
+
+    resSpeed1=createcalc(speedl)
+    resSpeed2 = createcalc(round((round((speedl+speedh)/2)+speedl)/2))
+    resSpeed3 = createcalc(round((speedl+speedh)/2))
+    resSpeed4 = createcalc(round((round((speedl+speedh)/2)+speedh)/2))
+    resSpeed5 = createcalc(speedh)
 
     print(request.POST)
     rails = request.POST.get('rails', '')
