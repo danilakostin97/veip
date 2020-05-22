@@ -289,7 +289,7 @@ class cput():
         self.ek3[6 - 1][1 - 1] = 0 - an2[1 - 1][1 - 1]
         self.v[4 - 1] = self.v[1 - 1]
         self.v[1 - 1] = 250 * self.v[4 - 1] / 9
-        self.trp()
+        self.trp(id_input)
 
     def __init__(self):
         self.put = np.ndarray(10, dtype=float)
@@ -477,10 +477,10 @@ class cput():
         self.ek3[6-1][1-1]=0-an2[1-1][1-1]
         self.v[4-1]=self.v[1-1]
         self.v[1-1]=250*self.v[4-1]/9
-        self.trp()
+        self.trp(0)
 
 
-    def trp(self):
+    def trp(self,id_input):
         skv = np.ndarray((65, 22, 22), dtype=np.complex128, order='F')
         wk = np.ndarray(128, dtype=np.complex128)
         vy = np.ndarray(12, dtype=float)
@@ -845,43 +845,43 @@ class cput():
         cursor = self.cursor
         for number_axis in range(self.n1):
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'p', number_axis + 1, vp3[number_axis], vp[number_axis]))
+                           (id_input, 'p', number_axis + 1, vp3[number_axis], vp[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'onapr', number_axis + 1, vm3[number_axis], vm[number_axis]))
+                           (id_input, 'onapr', number_axis + 1, vm3[number_axis], vm[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'y', number_axis + 1, vy3[number_axis], vy[number_axis]))
+                           (id_input, 'y', number_axis + 1, vy3[number_axis], vy[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'q', number_axis + 1, vs3[number_axis], vs[number_axis]))
+                           (id_input, 'q', number_axis + 1, vs3[number_axis], vs[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'ball', number_axis + 1, vb3[number_axis], vb[number_axis]))
+                           (id_input, 'ball', number_axis + 1, vb3[number_axis], vb[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default, %s,%s, %s,%s, %s)""",
-                           (1, 'opzp', number_axis + 1, vz3[number_axis], vz[number_axis]))
+                           (id_input, 'opzp', number_axis + 1, vz3[number_axis], vz[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'aksr', number_axis + 1, vr3[number_axis], vr[number_axis]))
+                           (id_input, 'aksr', number_axis + 1, vr3[number_axis], vr[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default,%s,%s, %s,%s, %s)""",
-                           (1, 'akss', number_axis + 1, va3[number_axis], va[number_axis]))
+                           (id_input, 'akss', number_axis + 1, va3[number_axis], va[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default, %s,%s, %s,%s, %s)""",
-                           (1, 'aksb', number_axis + 1, vo3[number_axis], vo[number_axis]))
+                           (id_input, 'aksb', number_axis + 1, vo3[number_axis], vo[number_axis]))
             
 
             cursor.execute("""INSERT INTO "result" VALUES (default, %s,%s, %s,%s, %s)""",
-                           (1, 'vzs', number_axis + 1, vzs3[number_axis], vzs[number_axis]))
+                           (id_input, 'vzs', number_axis + 1, vzs3[number_axis], vzs[number_axis]))
             
 
     def way(self, hhhh):

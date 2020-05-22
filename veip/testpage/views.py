@@ -160,7 +160,7 @@ def resset(request):
 
     params=veip_params1.cput()
     params.start(cursor, id_of_new_row)
-
+    conn.commit()
     print('FINAL')
     # print(request.POST)
     # print(tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed)
@@ -185,18 +185,39 @@ def resset(request):
     #data={"tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "rk":rk, "rmk":rmk, "voz":voz, "krip":krip, "gor":gor, "pol":pol, "ugl":ugl, "skrip":skrip, "speed":speed}
     return render(request,"restest.html", context=data)
 
+#old
 def createcalc(speed):
 
     param = veip_params.cput()
     arrres = param.putm()
     return arrres
 
+def getRes(name, id_input):
+    res=[]
+    resAll=[]
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    print(name)
+    cursor.execute('''select "expected_value","cko" from "result" where "name_param" =%(name)s and id_input=%(id_input)s;''' ,{ 'name':name,'id_input':id_input})
+    i=1
+    for row in cursor:
+        res=[]
+        res.append(i)
+        res.append(row[0])
+        res.append(row[1])
+        print(res)
+        resAll.append(res)
+        print(resAll)
+        i+=1
+    return  resAll
+
 def viewresult(request):
     # sql poisk rezultata
     s = request.POST.get('speed')
     remove_digits = str.maketrans('', '', digits)
     res = s.translate(remove_digits)
-    if res:
+    if res=='-':
         p = [[1, 0.02, 0.03, 60], [2, 0.201, 0.045, 60], [3, 0.02556, 0.005, 60], [4, 0.546, 0.02, 60]]
         onapr = [[1, 0.2, 0.02, 60], [2, 0.0201, 0.0045, 60], [3, 0.56, 0.05, 60], [4, 0.546, 0.02, 60]]
         y = [[1, 0.211, 0.025, 60], [2, 0.201, 0.045, 60], [3, 0.67, 0.25, 60], [4, 0.689, 0.2, 60]]
@@ -211,17 +232,20 @@ def viewresult(request):
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
         return render(request,"multires.html", context=datasolo)
     else:
-        print(res)
-        p = [[1, 0.02, 0.03], [2, 0.201, 0.045], [3, 0.02556, 0.005], [4, 0.546, 0.02]]
-        onapr = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
-        y = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
-        ball = [[1, 0.3, 0.03], [2, 0.31, 0.05], [3, 0.756, 0.163], [4, 0.946, 0.02]]
-        opzp = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
-        aksr = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
-        akss = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
-        aksb = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
-        vzs = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
-        q = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+        #print(res)
+        #print(request.POST.get('id'))
+        id_input=request.POST.get('id')
+        #print(getRes('p', 15))
+        p = getRes('p',id_input)#[[1, 0.02, 0.03], [2, 0.201, 0.045], [3, 0.02556, 0.005], [4, 0.546, 0.02]]
+        onapr = getRes('onapr',id_input)#[[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
+        y = getRes('y',id_input)#[[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
+        ball = getRes('ball',id_input)#[[1, 0.3, 0.03], [2, 0.31, 0.05], [3, 0.756, 0.163], [4, 0.946, 0.02]]
+        opzp = getRes('opzp',id_input)#[[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
+        aksr = getRes('aksr',id_input)#[[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+        akss = getRes('akss',id_input)#[[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
+        aksb = getRes('aksb',id_input)#[[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
+        vzs = getRes('vzs',id_input)#[[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
+        q = getRes('q',id_input)#[[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
         data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
         return render(request,"restest.html", context=data)

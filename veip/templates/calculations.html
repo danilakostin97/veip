@@ -349,7 +349,7 @@
    <form action="/testpage/viewres" method="post">
 {% csrf_token %}
         <tr>
-            <input name="id" value="{{ id }}" type="hidden">
+            <input name="id" name="id" value="{{ id }}" type="hidden">
             <input name="user" value="{{ user }}" type="hidden">
             <input name="time" value="{{ time }}" type="hidden">
             <th>{{ tps }}<input name="tps" value="{{ tps }}" type="hidden"></th>
