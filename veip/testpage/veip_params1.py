@@ -765,81 +765,81 @@ class cput():
             vz[k]=np.sqrt(abs(vz[k]))
 
         # Вывод результатов в файл
-        with open('output_st1.txt', 'w') as file:
-            file.write('ХАРАКТЕРИСТИКИ ПУТИ\n')
-            for item in self.put[:10]:
-                file.write("% .3e " % item)
-            file.write("\n")
-            file.write("ХАРАКТЕРИСТИКИ ВАГОНА\n")
-            file.write("   {0}   {1}   {2}   {3}\n".format(self.n1, self.n2, self.n3, self.n4))
-            for line in self.ek1.transpose()[:4]:
-                for item in line:
-                    file.write("% .3e" % item)
-                file.write("\n")
-            for line in self.ek2.transpose()[:2]:
-                for item in line:
-                    file.write("% .3e " % item)
-                file.write("\n")
-            for item in self.ek3.transpose()[0]:
-                file.write("% .3e" % item)
-            file.write("\n")
-            for item in self.ek4:
-                file.write("% .3e" % item)
-            file.write("\n")
-            file.write("СПЕКТРЫ ВОЗМУЩАЮЩИХ ФУНКЦИЙ\n")
-            file.write("{0:>4}\n".format(self.nom + 1))
-            for i in range(self.nom):
-                file.write(
-                    "{0:>6} {1:.3e}   {2:.3e}   {3:.3e}   {4:.3e}\n".format(i + 1, self.spektr[0][i], self.spektr[1][i],
-                                                                            self.spektr[2][i], self.spektr[3][i]))
-            file.write("РЕЗУЛЬТАТЫ ВЕРТИКАЛЬНОЙ МОДЕЛИ\n")
-            file.write("          p                    onapr                y\n")
-            for i in range(self.n1):
-                file.write("{0: .3e} {1: .3e}   {2: .3e} {3: .3e}   {4: .3e} {5: .3e}\n".format(vp3[i],vp[i],vm3[i],vm[i],vy3[i],vy[i]))
-            file.write("          q                    ball                 opzp\n")
-            for i in range(self.n1):
-                file.write("{0: .3e} {1: .3e}   {2: .3e} {3: .3e}   {4: .3e} {5: .3e}\n".format(vs3[i],vs[i],vb3[i],vb[i],vz3[i],vz[i]))
-            file.write("          aksr                 akss                 aksb\n")
-            for i in range(self.n1):
-                file.write("{0: .3e} {1: .3e}   {2: .3e} {3: .3e}   {4: .3e} {5: .3e}\n".format(vr3[i],vr[i],va3[i],va[i],vo3[i],vo[i]))
-            file.write("          vzs\n")
-            for i in range(self.n1):
-                file.write("{0: .3e} {1: .3e}\n".format(vzs3[i],vzs[i]))
-
-        with open('put.ekp','w') as file:
-            if self.n1!=8:
-                file.write("{0:>4}{1:>4}\n".format(iekip,n8))
-            for item in vo3[:8]:
-                file.write("% .3e" % item)
-            file.write("\n")
-            for item in vo3[8:]:
-                file.write("% .3e" % item)
-            for item in vo[:4]:
-                file.write("% .3e" % item)
-            file.write("\n")
-            for item in vo[4:]:
-                file.write("% .3e" % item)
-            if self.n1!=8:
-                for i in range(iekip):
-                    if i%8==0:
-                        file.write("\n")
-                    file.write("% .3e" % om1[i])
-                a=0
-                for m in range(iekip):
-                    tmp=[skv[m][n8-1][n8-1],skv[m][n8-1-1][n8-1],skv[m][n8-1-1][n8-1-1]]
-                    for j in range(self.n1):
-                        for i in range(self.n2):
-                            tmp.extend([skv[m][self.n1+2*(i+1)-1-1][self.n1+2*(i+1)-1-1],skv[m][self.n1+2*(i+1)-1-1][n8-1],
-                                 skv[m][self.n1+2*(i+1)-1-1][n8-1-1],skv[m][self.n1+2*(i+1)-1][self.n1+2*(i+1)-1-1],
-                                 skv[m][self.n1+2*(i+1)-1][self.n1+2*(i+1)-1],skv[m][j][j],
-                                 skv[m][self.n1+2*(i+1)-1-1][j],skv[m][self.n1+2*(i+1)-1][j]
-                                 ])
-                            for u,t in enumerate(tmp):
-                                if (u+a)%8==0:
-                                    file.write("\n")
-                                file.write("{0: .3e}{1: .3e}".format(t.real,t.imag))
-                            a+=len(tmp)
-                            tmp.clear()
+        # with open('output_st1.txt', 'w') as file:
+        #     file.write('ХАРАКТЕРИСТИКИ ПУТИ\n')
+        #     for item in self.put[:10]:
+        #         file.write("% .3e " % item)
+        #     file.write("\n")
+        #     file.write("ХАРАКТЕРИСТИКИ ВАГОНА\n")
+        #     file.write("   {0}   {1}   {2}   {3}\n".format(self.n1, self.n2, self.n3, self.n4))
+        #     for line in self.ek1.transpose()[:4]:
+        #         for item in line:
+        #             file.write("% .3e" % item)
+        #         file.write("\n")
+        #     for line in self.ek2.transpose()[:2]:
+        #         for item in line:
+        #             file.write("% .3e " % item)
+        #         file.write("\n")
+        #     for item in self.ek3.transpose()[0]:
+        #         file.write("% .3e" % item)
+        #     file.write("\n")
+        #     for item in self.ek4:
+        #         file.write("% .3e" % item)
+        #     file.write("\n")
+        #     file.write("СПЕКТРЫ ВОЗМУЩАЮЩИХ ФУНКЦИЙ\n")
+        #     file.write("{0:>4}\n".format(self.nom + 1))
+        #     for i in range(self.nom):
+        #         file.write(
+        #             "{0:>6} {1:.3e}   {2:.3e}   {3:.3e}   {4:.3e}\n".format(i + 1, self.spektr[0][i], self.spektr[1][i],
+        #                                                                     self.spektr[2][i], self.spektr[3][i]))
+        #     file.write("РЕЗУЛЬТАТЫ ВЕРТИКАЛЬНОЙ МОДЕЛИ\n")
+        #     file.write("          p                    onapr                y\n")
+        #     for i in range(self.n1):
+        #         file.write("{0: .3e} {1: .3e}   {2: .3e} {3: .3e}   {4: .3e} {5: .3e}\n".format(vp3[i],vp[i],vm3[i],vm[i],vy3[i],vy[i]))
+        #     file.write("          q                    ball                 opzp\n")
+        #     for i in range(self.n1):
+        #         file.write("{0: .3e} {1: .3e}   {2: .3e} {3: .3e}   {4: .3e} {5: .3e}\n".format(vs3[i],vs[i],vb3[i],vb[i],vz3[i],vz[i]))
+        #     file.write("          aksr                 akss                 aksb\n")
+        #     for i in range(self.n1):
+        #         file.write("{0: .3e} {1: .3e}   {2: .3e} {3: .3e}   {4: .3e} {5: .3e}\n".format(vr3[i],vr[i],va3[i],va[i],vo3[i],vo[i]))
+        #     file.write("          vzs\n")
+        #     for i in range(self.n1):
+        #         file.write("{0: .3e} {1: .3e}\n".format(vzs3[i],vzs[i]))
+        #
+        # with open('put.ekp','w') as file:
+        #     if self.n1!=8:
+        #         file.write("{0:>4}{1:>4}\n".format(iekip,n8))
+        #     for item in vo3[:8]:
+        #         file.write("% .3e" % item)
+        #     file.write("\n")
+        #     for item in vo3[8:]:
+        #         file.write("% .3e" % item)
+        #     for item in vo[:4]:
+        #         file.write("% .3e" % item)
+        #     file.write("\n")
+        #     for item in vo[4:]:
+        #         file.write("% .3e" % item)
+        #     if self.n1!=8:
+        #         for i in range(iekip):
+        #             if i%8==0:
+        #                 file.write("\n")
+        #             file.write("% .3e" % om1[i])
+        #         a=0
+        #         for m in range(iekip):
+        #             tmp=[skv[m][n8-1][n8-1],skv[m][n8-1-1][n8-1],skv[m][n8-1-1][n8-1-1]]
+        #             for j in range(self.n1):
+        #                 for i in range(self.n2):
+        #                     tmp.extend([skv[m][self.n1+2*(i+1)-1-1][self.n1+2*(i+1)-1-1],skv[m][self.n1+2*(i+1)-1-1][n8-1],
+        #                          skv[m][self.n1+2*(i+1)-1-1][n8-1-1],skv[m][self.n1+2*(i+1)-1][self.n1+2*(i+1)-1-1],
+        #                          skv[m][self.n1+2*(i+1)-1][self.n1+2*(i+1)-1],skv[m][j][j],
+        #                          skv[m][self.n1+2*(i+1)-1-1][j],skv[m][self.n1+2*(i+1)-1][j]
+        #                          ])
+        #                     for u,t in enumerate(tmp):
+        #                         if (u+a)%8==0:
+        #                             file.write("\n")
+        #                         file.write("{0: .3e}{1: .3e}".format(t.real,t.imag))
+        #                     a+=len(tmp)
+        #                     tmp.clear()
 
         #### ВЫГРУЗКА РЕЗУЛЬТАТОВ В БД ####
         cursor = self.cursor
