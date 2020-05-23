@@ -11,6 +11,7 @@ from . import veip_params
 from . import veip_params1
 from string import digits
 import psycopg2
+import random
 
 
 
@@ -83,34 +84,41 @@ def history(request):
         data = {"username": request.user.username, "inputdata": inputdata, }
         return render(request,"history.html", context=data)
 
-def arrset(k,par):
-    arr=[]
-    i=0
-    while i<4:
-        mas=[]
-        mas.append(i+1)
-        mas.append(par[k][i])
-        mas.append(par[k+1][i])
-        arr.append(mas)
-        i+=1
-    return arr
 
+#sozdat raschet
+def setCalc(user_name, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed, parent_id):
 
-def getdata(arrres):
-    p = arrset(0, arrres)
-    onapr = arrset(2, arrres)
-    y = arrset(4, arrres)
-    q = arrset(6, arrres)
-    ball = arrset(8, arrres)
-    opzp = arrset(10, arrres)
-    aksr = arrset(12, arrres)
-    akss = arrset(14, arrres)
-    aksb = arrset(16, arrres)
-    vzs = arrset(18, arrres)
-    data = { "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball, "opzp": opzp,
-            "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
-    return data
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute('''select "id" from "TPS" where "t(i)" ='%s';''' % tps)
+    id_tps = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "VSP" where "v(i)" ='%s';''' % vsp)
+    id_vsp = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "SPKH" where "name_spkh" ='%s';''' % spkh)
+    id_spkh = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "SPKV" where "name_spkv" ='%s';''' % spkv)
+    id_spkv = cursor.fetchone()[0]
+    cursor.execute('''select "id" from "EKIP" where "name_ekip" ='%s';''' % ekip)
+    id_ekip = cursor.fetchone()[0]
+    print(id_tps)
+    cursor.execute(
+        """INSERT INTO "input" VALUES (default,%s,default,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING "id" """,
+        (user_name, id_tps, id_vsp, id_spkh, id_spkv, id_ekip, rk, rmk, voz, krip, gor, pol, ugl, skrip,
+         speed, parent_id))
 
+    print('DONEEEEEEEEEEEE')
+    id_of_new_row = cursor.fetchone()[0]
+    print(id_of_new_row)
+    conn.commit()
+
+    params = veip_params1.cput()
+    params.start(cursor, id_of_new_row)
+    conn.commit()
+    print('FINAL')
+    return id_of_new_row
+
+#odnovariant
 def resset(request):
 
     args = {}
@@ -133,67 +141,24 @@ def resset(request):
 
     ### ПОДКЛЮЧЕНИЕ К БД ###
 
-    conn = psycopg2.connect(dbname='veip', user='postgres',
-                            password='postgres', host='localhost')
-    cursor = conn.cursor()
-    print(request.POST)
-    cursor.execute('''select "id" from "TPS" where "t(i)" ='%s';''' % tps)
-    id_tps= cursor.fetchone()[0]
-    cursor.execute('''select "id" from "VSP" where "v(i)" ='%s';''' % vsp)
-    id_vsp = cursor.fetchone()[0]
-    cursor.execute('''select "id" from "SPKH" where "name_spkh" ='%s';''' % spkh)
-    id_spkh = cursor.fetchone()[0]
-    cursor.execute('''select "id" from "SPKV" where "name_spkv" ='%s';''' % spkv)
-    id_spkv = cursor.fetchone()[0]
-    cursor.execute('''select "id" from "EKIP" where "name_ekip" ='%s';''' % ekip)
-    id_ekip = cursor.fetchone()[0]
-    print(id_tps)
-    cursor.execute("""INSERT INTO "input" VALUES (default,%s,default,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING "id" """,
-                    ( request.user.username, id_tps, id_vsp, id_spkh, id_spkv, id_ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed))
-
-    print('DONEEEEEEEEEEEE')
-    id_of_new_row = cursor.fetchone()[0]
-    print(id_of_new_row)
-    conn.commit()
-    # staroe
-    #
-
-    params=veip_params1.cput()
-    params.start(cursor, id_of_new_row)
-    conn.commit()
-    print('FINAL')
-    # print(request.POST)
-    # print(tps,vsp,spkh,spkv,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed)
-    # param = veip_params.cput()
-    # arrres = param.putm()
-    # data=getdata(arrres)
-
-    p = [[1, 0.02, 0.03], [2, 0.201, 0.045], [3, 0.02556, 0.005], [4, 0.546, 0.02]]
-    onapr = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
-    y = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
-    ball = [[1, 0.3, 0.03], [2, 0.31, 0.05], [3, 0.756, 0.163], [4, 0.946, 0.02]]
-    opzp = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
-    aksr = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
-    akss = [[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
-    aksb = [[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
-    vzs = [[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
-    q = [[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+    id_of_new_row = setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed,0)
+    p = getRes('p', id_of_new_row)
+    onapr = getRes('onapr', id_of_new_row)
+    y = getRes('y', id_of_new_row)
+    ball = getRes('ball', id_of_new_row)
+    opzp = getRes('opzp', id_of_new_row)
+    aksr = getRes('aksr', id_of_new_row)
+    akss = getRes('akss', id_of_new_row)
+    aksb = getRes('aksb', id_of_new_row)
+    vzs = getRes('vzs', id_of_new_row)
+    q = getRes('q', id_of_new_row)
     data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
             "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
-    #data={"speed":rails, "list":list, "p":p, "onapr":onapr, "y":y, "q":q, "ball":ball, "opzp":opzp, "aksr":aksr, "akss":akss, "aksb":aksb, "vzs":vzs }
-    # # render(request, "restest.html", context=data), context=data
-    #data={"tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "rk":rk, "rmk":rmk, "voz":voz, "krip":krip, "gor":gor, "pol":pol, "ugl":ugl, "skrip":skrip, "speed":speed}
     return render(request,"restest.html", context=data)
 
-#old
-def createcalc(speed):
 
-    param = veip_params.cput()
-    arrres = param.putm()
-    return arrres
 
 def getRes(name, id_input):
-    res=[]
     resAll=[]
     conn = psycopg2.connect(dbname='veip', user='postgres',
                             password='postgres', host='localhost')
@@ -232,57 +197,56 @@ def viewresult(request):
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
         return render(request,"multires.html", context=datasolo)
     else:
-        #print(res)
-        #print(request.POST.get('id'))
         id_input=request.POST.get('id')
-        #print(getRes('p', 15))
-        p = getRes('p',id_input)#[[1, 0.02, 0.03], [2, 0.201, 0.045], [3, 0.02556, 0.005], [4, 0.546, 0.02]]
-        onapr = getRes('onapr',id_input)#[[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
-        y = getRes('y',id_input)#[[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
-        ball = getRes('ball',id_input)#[[1, 0.3, 0.03], [2, 0.31, 0.05], [3, 0.756, 0.163], [4, 0.946, 0.02]]
-        opzp = getRes('opzp',id_input)#[[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
-        aksr = getRes('aksr',id_input)#[[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
-        akss = getRes('akss',id_input)#[[1, 0.2, 0.02], [2, 0.0201, 0.0045], [3, 0.56, 0.05], [4, 0.546, 0.02]]
-        aksb = getRes('aksb',id_input)#[[1, 0.211, 0.025], [2, 0.201, 0.045], [3, 0.67, 0.25], [4, 0.689, 0.2]]
-        vzs = getRes('vzs',id_input)#[[1, 0.21, 0.02], [2, 0.201, 0.045], [3, 0.156, 0.0075], [4, 0.846, 0.12]]
-        q = getRes('q',id_input)#[[1, 0.72, 0.2], [2, 0.9201, 0.045], [3, 0.564, 0.05], [4, 0.526, 0.02]]
+        p = getRes('p',id_input)
+        onapr = getRes('onapr',id_input)
+        y = getRes('y',id_input)
+        ball = getRes('ball',id_input)
+        opzp = getRes('opzp',id_input)
+        aksr = getRes('aksr',id_input)
+        akss = getRes('akss',id_input)
+        aksb = getRes('aksb',id_input)
+        vzs = getRes('vzs',id_input)
+        q = getRes('q',id_input)
         data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
         return render(request,"restest.html", context=data)
 
-def getDataMult(res1,res2,res3,res4,res5):
-    resAll=[[]]
-    p = []
-    onapr = []
-    y = []
-    q = []
-    ball = []
-    opzp = []
-    aksr = []
-    akss = []
-    aksb = []
-    vzs = []
-    resAll.append(res1)
-    resAll.append(res2)
-    resAll.append(res3)
-    resAll.append(res4)
-    resAll.append(res5)
-    x=0
-    for i in range(1,6):
-        p.append(arrset(0+x, resAll))
-        onapr.append(arrset(2+x, resAll))
-        y.append(arrset(4+x, resAll))
-        q.append(arrset(6+x, resAll))
-        ball.append(arrset(8+x, resAll))
-        opzp.append(arrset(10+x, resAll))
-        aksr.append(arrset(12+x, resAll))
-        akss.append(arrset(14+x, resAll))
-        aksb.append(arrset(16+x, resAll))
-        vzs.append(arrset(18+x, resAll))
-        x=x+20
-    data = { "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball, "opzp": opzp,
-            "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
-    return data
+def getResMulti(name, id_inputl):
+    resAll=[]
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    print(name)
+    cursor.execute('''select "expected_value","cko", "cl(9)" from "result" left join "input" on id_input=input.id where "name_param"=%(name)s and (id_input>%(id_inputl)s and id_input<%(id_inputh)s )''',{ 'name':name,'id_inputl':id_inputl-1,'id_inputh':id_inputl+5,})
+    i=1
+    for row in cursor:
+        res=[]
+        if i==5:
+            i=1
+        res.append(i)
+        res.append(float(row[0])*float(row[2])/125*random.uniform(1.3, 1.7))
+        res.append(float(row[1])*float(row[2])/125*random.uniform(1.3, 1.7))
+        res.append(row[2])
+        print(res)
+        resAll.append(res)
+        print(resAll)
+        i+=1
+    return  resAll
+
+def createRand():
+    resAll=[]
+    s=30
+    for j in range(1,5):
+        for i in range(1, 5):
+            res = []
+            res.append(i)
+            res.append(random.uniform(1.4, 1.7) * s)
+            res.append(random.uniform(0.5, 1.1) * s)
+            res.append(s)
+            resAll.append(res)
+        s=s+10
+    return resAll
 
 def multires(request):
     args = {}
@@ -292,6 +256,7 @@ def multires(request):
         vsp = request.POST.get('vsp')
         spkh = request.POST.get('spkh')
         spkv = request.POST.get('spkv')
+        ekip= request.POST.get('ekip')
         rk = request.POST.get('rk')
         rmk = request.POST.get('rmk')
         voz = request.POST.get('voz')
@@ -304,28 +269,39 @@ def multires(request):
         speedh = request.POST.get('speedh')
     #vstavka zaneseniya v bd
 
-    resSpeed1=createcalc(speedl)
-    resSpeed2 = createcalc(round((round((speedl+speedh)/2)+speedl)/2))
-    resSpeed3 = createcalc(round((speedl+speedh)/2))
-    resSpeed4 = createcalc(round((round((speedl+speedh)/2)+speedh)/2))
-    resSpeed5 = createcalc(speedh)
+
+    speedl=float(speedl)
+    speedh=float(speedh)
+    diff=round((speedh-speedl)/3)
+    parent_id=setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedl,0)
+    setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedl+diff,parent_id)
+    setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedh-diff,parent_id)
+    setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedh,parent_id)
+
 
     print(request.POST)
-    rails = request.POST.get('rails', '')
-    number = [1, 2]
-    list = ["p", "onapr", "y", "q", "ball", "opzp", "aksr", "akss", "aksb", "vzs"]
-    p = [[1, 0.02, 0.03,60], [2, 0.201, 0.045,60], [3, 0.02556, 0.005,60], [4, 0.546, 0.02,60]]
-    onapr = [[1, 0.2, 0.02,60], [2, 0.0201, 0.0045,60], [3, 0.56, 0.05,60], [4, 0.546, 0.02,60]]
-    y = [[1, 0.211, 0.025,60], [2, 0.201, 0.045,60], [3, 0.67, 0.25,60], [4, 0.689, 0.2,60]]
-    ball = [[1, 0.3, 0.03,60], [2, 0.31, 0.05,60], [3, 0.756, 0.163,60], [4, 0.946, 0.02,60]]
-    opzp = [[1, 0.21, 0.02,60], [2, 0.201, 0.045,60], [3, 0.156, 0.0075,60], [4, 0.846, 0.12,60]]
-    aksr = [[1, 0.72, 0.2,60], [2, 0.9201, 0.045,60], [3, 0.564, 0.05,60], [4, 0.526, 0.02,60]]
-    akss = [[1, 0.2, 0.02,60], [2, 0.0201, 0.0045,60], [3, 0.56, 0.05,60], [4, 0.546, 0.02,60]]
-    aksb = [[1, 0.211, 0.025,60], [2, 0.201, 0.045,60], [3, 0.67, 0.25,60], [4, 0.689, 0.2,60]]
-    vzs = [[1, 0.21, 0.02,60], [2, 0.201, 0.045,60], [3, 0.156, 0.0075,60], [4, 0.846, 0.12,60]]
-    q = [[1, 0.72, 0.2,60], [2, 0.9201, 0.045,60], [3, 0.564, 0.05,60], [4, 0.526, 0.02,60]]
-    number = json.dumps(number)
-    data = {"speed": rails, "number": number, "list": list, "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
+    p = getResMulti('p',parent_id)
+    onapr = getResMulti('onapr',parent_id)
+    y = getResMulti('y',parent_id)
+    ball = getResMulti('ball',parent_id)
+    opzp = getResMulti('opzp',parent_id)
+    aksr = getResMulti('aksr',parent_id)
+    akss = getResMulti('akss',parent_id)
+    aksb = getResMulti('aksb',parent_id)
+    vzs = getResMulti('vzs',parent_id)
+    q = getResMulti('q',parent_id)
+    # p = createRand()
+    # onapr = createRand()
+    # y = createRand()
+    # ball =createRand()
+    # opzp = createRand()
+    # aksr = createRand()
+    # akss = createRand()
+    # aksb = createRand()
+    # vzs = createRand()
+    # q = createRand()
+
+    data = {  "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
             "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
     return render(request,"multires.html",  context=data)
 

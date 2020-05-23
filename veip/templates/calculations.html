@@ -251,7 +251,7 @@
         <div class="field">
     <label> Номер выбранного набора данных в файле TPS </label>
      <select name="tps" id="tpsm">
-       {% for type in types %}
+       {% for type in tps %}
        <option>{{ type }}</option>
        {% endfor %}
      </select>
@@ -259,7 +259,7 @@
        <div class="field">
     <label> Номер выбранного набора данных в файле VSP </label>
      <select name="vsp" id="vspm">
-       {% for type in types %}
+       {% for type in vsp %}
        <option>{{ type }}</option>
        {% endfor %}
      </select>
@@ -267,7 +267,7 @@
      <div class="field">
     <label> Номер выбранного набора данных в файле SPKH </label>
      <select name="spkh" id="spkh">
-       {% for type in types %}
+       {% for type in spkh %}
        <option>{{ type }}</option>
        {% endfor %}
      </select>
@@ -275,7 +275,15 @@
        <div class="field">
     <label> Номер выбранного набора данных в файле SPKV </label>
      <select name="spkv" id="spkv">
-       {% for type in types %}
+       {% for type in spkv %}
+       <option>{{ type }}</option>
+       {% endfor %}
+     </select>
+      </div>
+       <div class="field">
+    <label> Номер выбранного набора данных в файле EKIP </label>
+     <select name="ekip" id="ekip">
+       {% for type in ekip %}
        <option>{{ type }}</option>
        {% endfor %}
      </select>

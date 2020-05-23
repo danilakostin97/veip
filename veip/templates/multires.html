@@ -51,8 +51,8 @@
         {% for n,m,s,v in p %}
         <tr>
             <th>{{n}}</th>
-            <th><input value="-2" type="hidden">{{m}}</th>
-            <th><input value="0.5" type="hidden">{{s}}</th>
+            <th>{{m}}</th>
+            <th>{{s}}</th>
             <th>{{v}}</th>
         </tr>
             {% endfor %}
@@ -70,20 +70,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -127,20 +150,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -184,20 +230,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -245,20 +314,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -301,20 +393,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -359,20 +474,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -420,20 +558,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -476,20 +637,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -533,20 +717,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
@@ -593,20 +800,43 @@
 
     // The data for our dataset
     data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: [arr[0][3], arr[4][3], arr[8][3], arr[12][3],],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: arr[0][0],
+            backgroundColor: 'rgba(252,252,252,0)',
             borderColor: 'rgb(255, 99, 132)',
             data: []
-        }]
+        },
+            {
+            label: arr[1][0],
+            backgroundColor: 'rgb(55,114,186,0)',
+            borderColor: 'rgb(55,114,186)',
+            data: []
+        },
+            {
+            label: arr[2][0],
+            backgroundColor: 'rgb(60,215,34,0)',
+            borderColor: 'rgb(60,215,34)',
+            data: []
+        },
+            {
+            label: arr[3][0],
+            backgroundColor: 'rgb(255,255,255,0)',
+            borderColor: 'rgb(241,223,62)',
+            data: []
+        },
+
+        ]
     },
 
     // Configuration options go here
     options: {}
 });
-      for (var i =0; i<arr.length; i+=1) {
-   myChartp.data.datasets[0].data.push(arr[i][1]);
+      for (var i =0; i<arr.length; i+=4) {
+   myChartp.data.datasets[0].data.push(arr[i][2]);
+   myChartp.data.datasets[1].data.push(arr[i+1][2]);
+   myChartp.data.datasets[2].data.push(arr[i+2][2]);
+   myChartp.data.datasets[3].data.push(arr[i+3][2]);
   }
   //Обновляем
   myChartp.update();
