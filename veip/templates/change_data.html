@@ -249,6 +249,26 @@
          <label>Коэффициент углового демпфирования при повороте тележки относительно кузова</label>
          <input type="number" step="any" min="0" name="ek24">
      </div>
+       <div class="field">
+         <label>Расстояние от центра</label>
+         <input type="number" step="any" min="0" name="hct">
+     </div>
+             <div class="field">
+         <label>Число тележек</label>
+         <input type="number" step="any" min="0" name="n1">
+     </div>
+             <div class="field">
+         <label>Число осей в тележке</label>
+         <input type="number" step="any" min="0" name="no1">
+     </div>
+             <div class="field">
+         <label>Координаты точек подвешивания тележек, м</label>
+         <input type="text" name="an1">
+     </div>
+             <div class="field">
+         <label>Координаты точек подвешивания колёсных пар, м</label>
+         <input type="text" name="an2">
+     </div>
               <button type="submit"  class="button">Добавить</button>
     </form>
      </div>
@@ -267,7 +287,27 @@
  </div>
  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
  <div class="panel-body">
- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+ <div class="main_inp">
+      <form action="/testpage/change_SPKH" method="post">
+          <div class="field">
+           <label>Количество точек в таблице, описывающей спектральные плотности неровностей пути в горизонтальной плоскости</label>
+           <input type="number" step="any" min="0" name="nomh">
+     </div>
+          <div class="field">
+           <label>Вектор частот, 2*3.14/м</label>
+         <input type="text" name="f">
+     </div>
+          <div class="field">
+           <label>Вектор спектральных плотностей неровностей пути в плане m**3/(2*3.14)</label>
+         <input type="text" name="fp">
+     </div>
+          <div class="field">
+           <label>Вектор спектральных плотностей неровностей пути по уровню m**3/(2*3.14)</label>
+         <input type="text" name="fp">
+     </div>
+              <button type="submit"  class="button">Добавить</button>
+      </form>
+ </div>
  </div>
  </div>
  </div>
@@ -282,7 +322,31 @@
  </div>
  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
  <div class="panel-body">
- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
+ <div class="main_inp">
+      <form action="/testpage/change_SPKV" method="post">
+          <div class="field">
+           <label>Количество точек в таблице, описывающей спектральные плотности неровностей пути и колес в вертикальной плоскости.</label>
+           <input type="number" step="any" min="0" name="nomv">
+     </div>
+          <div class="field">
+           <label>Вектор частот, 2*3.14/м</label>
+         <input type="text" name="s">
+     </div>
+          <div class="field">
+           <label>Вектор спектральных плотностей неровностей пути в продольном профиле, см**3/(2*3.14)</label>
+         <input type="text" name="s1">
+     </div>
+          <div class="field">
+           <label>Вектор спектральных плотностей неровностей на поверхности катания колеса, см**3/(2*3.14)</label>
+         <input type="text" name="s2">
+     </div>
+            <div class="field">
+           <label>Вектор спектральных плотностей зазоров между рельсом и основанием, см**3/(2*3.14)</label>
+         <input type="text" name="s3">
+     </div>
+              <button type="submit"  class="button">Добавить</button>
+      </form>
+ </div>
  </div>
  </div>
  </div>
@@ -297,8 +361,41 @@
  </div>
  <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
  <div class="panel-body">
- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia lacinia mauris, at ultricies leo ornare nec. Vivamus eu est vel felis dignissim tempor. Nulla facilisi. Duis molestie tortor ac tempor volutpat. Phasellus nec mi aliquet, sollicitudin neque eget, consectetur libero. Vestibulum sollicitudin sapien libero, egestas tempus eros scelerisque eu.</p>
- <button type="submit" >Результат</button>
+     <div class="main_inp">
+      <form action="/testpage/change_EKIP" method="post">
+          <div class="field">
+           <label>Число характерных точек кузова, заданных в таблице набора данных</label>
+           <input type="number" step="any" min="0" name="ikus">
+     </div>
+          <div class="field">
+           <label>Вектор координат характерных точек кузова</label>
+         <input type="text" name="xkus">
+              <input type="text" name="ykus">
+              <input type="text" name="zkus">
+     </div>
+          <div class="field">
+           <label>Число характерных точек первой тележки в таблице набора данных</label>
+         <input type="number" name="itel1">
+     </div>
+          <div class="field">
+           <label>Вектора координат характерных точек</label>
+         <input type="text" name="xtel1">
+            <input type="text" name="ytel1">
+              <input type="text" name="ztel1">
+     </div>
+          <div class="field">
+           <label>Число характерных точек второй тележки в таблице набора данных</label>
+         <input type="number" name="itel1">
+     </div>
+            <div class="field">
+           <label>Вектора координат характерных точек второй тележки</label>
+         <input type="text" name="xtel2">
+                <input type="text" name="ytel2">
+                <input type="text" name="ztel2">
+     </div>
+              <button type="submit"  class="button">Добавить</button>
+      </form>
+ </div>
  </div>
  </div>
  </div>

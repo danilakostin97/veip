@@ -353,7 +353,7 @@
 {#    </tr>#}
 {#    </thead>#}
     <tbody>
-    {% for id,user,time,tps,vsp,spkh,spkv,ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed in inputdata %}
+    {% for id,user,time,tps,vsp,spkh,spkv,ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed,speedl,speedh in inputdata %}
    <form action="/testpage/viewres" method="post">
 {% csrf_token %}
         <tr>
@@ -373,7 +373,10 @@
             <th>{{ pol }}<input name="pol" value="{{ pol }}" type="hidden"></th>
             <th>{{ ugl }}<input name="ugl" value="{{ ugl }}" type="hidden"></th>
             <th>{{ skrip }}<input name="skrip" value="{{ skrip }}" type="hidden"></th>
-            <th>{{ speed }}<input name="speed" value="{{ speed }}" type="hidden"></th>
+            <th>{{ speed }}<input name="speed" value="{{ speed }}" type="hidden">
+                <input name="speedl" value="{{ speedl }}" type="hidden">
+                <input name="speedh" value="{{ speedh }}" type="hidden">
+            </th>
 {#            <th>{{ status }}</th>#}
             <th><button type="submit" >Результат</button></th>
         </tr>
