@@ -147,7 +147,7 @@
  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" >
  <div class="panel-body">
      <div class="main_inp">
-         <form action="/testpage/change_ТРS" method="post">
+         <form action="/testpage/change_tableTPS" method="post">
 {% csrf_token %}
      <div class="field">
           <label>Наименование подвижного состава</label>
@@ -289,6 +289,11 @@
  <div class="panel-body">
  <div class="main_inp">
       <form action="/testpage/change_SPKH" method="post">
+          {% csrf_token %}
+          <div class="field">
+           <label>Наименование пути</label>
+         <input type="text" name="name_spkh">
+     </div>
           <div class="field">
            <label>Количество точек в таблице, описывающей спектральные плотности неровностей пути в горизонтальной плоскости</label>
            <input type="number" step="any" min="0" name="nomh">
@@ -303,9 +308,9 @@
      </div>
           <div class="field">
            <label>Вектор спектральных плотностей неровностей пути по уровню m**3/(2*3.14)</label>
-         <input type="text" name="fp">
+         <input type="text" name="fh">
      </div>
-              <button type="submit"  class="button">Добавить</button>
+              <button type="submit" class="button">Добавить</button>
       </form>
  </div>
  </div>
@@ -324,6 +329,11 @@
  <div class="panel-body">
  <div class="main_inp">
       <form action="/testpage/change_SPKV" method="post">
+          {% csrf_token %}
+          <div class="field">
+           <label>Наименование ка</label>
+         <input type="text" name="name_spkv">
+     </div>
           <div class="field">
            <label>Количество точек в таблице, описывающей спектральные плотности неровностей пути и колес в вертикальной плоскости.</label>
            <input type="number" step="any" min="0" name="nomv">
@@ -363,6 +373,11 @@
  <div class="panel-body">
      <div class="main_inp">
       <form action="/testpage/change_EKIP" method="post">
+          {% csrf_token %}
+           <div class="field">
+           <label>Наименование</label>
+         <input type="text" name="name_ekip">
+     </div>
           <div class="field">
            <label>Число характерных точек кузова, заданных в таблице набора данных</label>
            <input type="number" step="any" min="0" name="ikus">
@@ -385,7 +400,7 @@
      </div>
           <div class="field">
            <label>Число характерных точек второй тележки в таблице набора данных</label>
-         <input type="number" name="itel1">
+         <input type="number" name="itel2">
      </div>
             <div class="field">
            <label>Вектора координат характерных точек второй тележки</label>
@@ -419,135 +434,135 @@
      </div>
              <div class="field">
           <label>Модуль упругости рельсовой стали, кгс/см**2</label>
-          <input type="text" name="put1">
+          <input type="number" name="put1">
      </div>
               <div class="field">
           <label>Жесткость в контакте рельса и колеса, кгс/см</label>
-          <input type="text" name="put2">
+          <input type="number" name="put2">
      </div>
                  <div class="field">
           <label>Высота рельса, см</label>
-          <input type="text" name="put3">
+          <input type="number" name="put3">
      </div>
               <div class="field">
           <label>Расстояние от нейтральной оси до нижней грани подошвы рельса, см</label>
-          <input type="text" name="put4">
+          <input type="number" name="put4">
      </div>
              <div class="field">
           <label>Расстояние от центра кручения до нижней грани подошвы рельса, см</label>
-          <input type="text" name="put5">
+          <input type="number" name="put5">
      </div>
               <div class="field">
           <label>Расстояние между центрами тяжести сечений головки и подошвы, см</label>
-          <input type="text" name="put6">
+          <input type="number" name="put6">
      </div>
                  <div class="field">
           <label>Ширина головки, см</label>
-          <input type="text" name="put7">
+          <input type="number" name="put7">
      </div>
               <div class="field">
           <label>Ширина подошвы, см</label>
-          <input type="text" name="put8">
+          <input type="number" name="put8">
      </div>
                  <div class="field">
           <label>Момент инерции поперечного сечения рельса относительно главной вертикальной оси, см**4</label>
-          <input type="text" name="put9">
+          <input type="number" name="put9">
      </div>
               <div class="field">
           <label>Момент инерции поперечного сечения головки рельса относительно главной вертикальной оси, см**4</label>
-          <input type="text" name="put10">
+          <input type="number" name="put10">
      </div>
                  <div class="field">
           <label>Момент инерции поперечного сечения подошвы рельса относительно главной вертикальной оси, см**4</label>
-          <input type="text" name="put11">
+          <input type="number" name="put11">
      </div>
               <div class="field">
           <label>Момент инерции поперечного сечения рельса относительно поперечной нейтральной оси рельса, см**4</label>
-          <input type="text" name="put12">
+          <input type="number" name="put12">
      </div>
              <div class="field">
           <label>Распределенный полярный момент инерции рельса относительно центра кручения, кгс*см**2</label>
-          <input type="text" name="put13">
+          <input type="number" name="put13">
      </div>
               <div class="field">
           <label>Приведенная жесткость головки и подошвы рельса на изгиб, кгс*см**2</label>
-          <input type="text" name="put4">
+          <input type="number" name="put14">
      </div>
                  <div class="field">
           <label>Жесткость рельса на кручение, кгс*см**2</label>
-          <input type="text" name="put15">
+          <input type="number" name="put15">
      </div>
               <div class="field">
           <label>Длина шпалы, см</label>
-          <input type="text" name="put16">
+          <input type="number" name="put16">
      </div>
               <div class="field">
           <label>Ширина нижней постели шпалы, см</label>
-          <input type="text" name="put17">
+          <input type="number" name="put17">
      </div>
               <div class="field">
           <label>Коэффициент изгиба шпалы</label>
-          <input type="text" name="put18">
+          <input type="number" name="put18">
      </div>
                  <div class="field">
           <label>Масса шпалы, кгс*с**2/см</label>
-          <input type="text" name="put19">
+          <input type="number" name="put19">
      </div>
               <div class="field">
           <label>Расстояние между шпалами, см</label>
-          <input type="text" name="put20">
+          <input type="number" name="put20">
      </div>
              <div class="field">
           <label>Модуль упругости подрельсового основания в горизонтальной плоскости, кгс/см**2</label>
-          <input type="text" name="put21">
+          <input type="number" name="put21">
      </div>
               <div class="field">
           <label>Модуль упругости подрельсового основания в вертикальной плоскости, кгс/см**2</label>
-          <input type="text" name="put22">
+          <input type="number" name="put22">
      </div>
                  <div class="field">
           <label>Модуль упругости подрельсового основания в отношении кручения рельса, кгс/рад</label>
-          <input type="text" name="put23">
+          <input type="number" name="put23">
      </div>
               <div class="field">
           <label>Приведенная к рельсу распределенная масса пути при поперечных колебаниях, кгс*с**2/см**2</label>
-          <input type="text" name="put24">
+          <input type="number" name="put24">
      </div>
                  <div class="field">
           <label>Приведенная к рельсу распределенная масса пути при вертикальных колебаниях, кгс*с**2/см**2</label>
-          <input type="text" name="put25">
+          <input type="number" name="put25">
      </div>
               <div class="field">
           <label>Распределенное демпфирование пути при поперечных колебаниях, кгс*с/см**2</label>
-          <input type="text" name="put26">
+          <input type="number" name="put26">
      </div>
                  <div class="field">
           <label>Распределенное демпфирование пути при вертикальных колебаниях, кгс*с/см**2</label>
-          <input type="text" name="put27">
+          <input type="number" name="put27">
      </div>
               <div class="field">
           <label>Распределенное демпфирование пути при крутильных колебаниях, кгс*с/см**2</label>
-          <input type="text" name="put28">
+          <input type="number" name="put28">
      </div>
              <div class="field">
           <label>Коэффициент демпфирования пути при вертикальных колебаниях на уровне нижней постели шпалы, кгс*с/см</label>
-          <input type="text" name="put29">
+          <input type="number" name="put29">
      </div>
               <div class="field">
           <label>Коэффициент демпфирования в узле скрепления, кгс*с/см</label>
-          <input type="text" name="put30">
+          <input type="number" name="put30">
      </div>
                  <div class="field">
           <label>Жесткость основания по нижней постели шпалы, кгс/см</label>
-          <input type="text" name="put31">
+          <input type="number" name="put31">
      </div>
               <div class="field">
           <label>Жесткость узла скрепления, кгс/см</label>
-          <input type="text" name="put32">
+          <input type="number" name="put32">
      </div>
               <div class="field">
           <label>Толщина балласта под шпалой, см</label>
-          <input type="text" name="put33">
+          <input type="number" name="put33">
      </div>
               <button type="submit"  class="button">Добавить</button>
          </form>

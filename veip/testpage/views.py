@@ -463,3 +463,205 @@ def change(request):
     data = {"username": request.user.username, }
     return render(request,"change_data.html", context=data)
 
+def change_SPKH(request):
+    args = {}
+    args.update(csrf(request))
+    if request.method == "POST":
+        nomh=int(request.POST.get('nomh'))
+        name_spkh=request.POST.get('name_spkh')
+        f=request.POST.get('f')
+        f=str(f)
+        f=f.split(',')
+        f = list(map(float, f))
+        fp=request.POST.get('fp')
+        fp = str(fp)
+        fp = fp.split(',')
+        fp = list(map(float, fp))
+        fh=request.POST.get('fh')
+        fh = str(fh)
+        fh = fh.split(',')
+        fh = list(map(float, fh))
+    query = 'INSERT INTO "SPKH" VALUES (default, %s,%s, %s,%s, %s);'
+    data = (name_spkh,nomh, f,fp, fh)
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute(query, data)
+    conn.commit()
+    return redirect('/testpage/change')
+
+def change_SPKV(request):
+    args = {}
+    args.update(csrf(request))
+    if request.method == "POST":
+        name_spkv=request.POST.get('name_spkv')
+        nomv=request.POST.get('nomv')
+        s=request.POST.get('s')
+        s=str(s)
+        s=s.split(',')
+        s = list(map(float, s))
+        s1=request.POST.get('s1')
+        s1=str(s1)
+        s1 = s1.split(',')
+        s1 = list(map(float, s1))
+        s2=request.POST.get('s2')
+        s2=str(s2)
+        s2 = s2.split(',')
+        s2 = list(map(float, s2))
+        s3=request.POST.get('s3')
+        s3=str(s3)
+        s3 = s3.split(',')
+        s3 = list(map(float, s3))
+        query = 'INSERT INTO "SPKV" VALUES (default, %s,%s, %s,%s,%s,%s);'
+        data = (name_spkv, nomv, s, s1, s2,s3)
+        conn = psycopg2.connect(dbname='veip', user='postgres',
+                                password='postgres', host='localhost')
+        cursor = conn.cursor()
+        cursor.execute(query, data)
+        conn.commit()
+    return redirect('/testpage/change')
+
+def parseArr(value):
+    value = str(value)
+    value = value.split(',')
+    value= list(map(float, value))
+    return value
+
+def change_EKIP(request):
+    args = {}
+    args.update(csrf(request))
+    if request.method == "POST":
+        name_ekip = request.POST.get('name_ekip')
+        ikus=int(request.POST.get('ikus'))
+
+        xkus= request.POST.get('xkus')
+        xkus=parseArr(xkus)
+        ykus= request.POST.get('ykus')
+        ykus=parseArr(ykus)
+        zkus= request.POST.get('zkus')
+        zkus=parseArr(zkus)
+
+        itel1= int(request.POST.get('itel1'))
+
+        xtel1= request.POST.get('xtel1')
+        xtel1=parseArr(xtel1)
+        ytel1= request.POST.get('ytel1')
+        ytel1 = parseArr(ytel1)
+        ztel1= request.POST.get('ztel1')
+        ztel1=parseArr(ztel1)
+
+        itel2 = int(request.POST.get('itel2'))
+
+        xtel2 = request.POST.get('xtel2')
+        xtel2=parseArr(xtel2)
+        ytel2 = request.POST.get('ytel2')
+        ytel2=parseArr(ytel2)
+        ztel2 = request.POST.get('ztel2')
+        ztel2=parseArr(ztel2)
+
+    query = 'INSERT INTO "EKIP" VALUES (default, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s);'
+    data = (name_ekip, ikus, xkus, ykus, zkus, itel1,xtel1,ytel1,ztel1, itel2,xtel2,ytel2,ztel2)
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute(query, data)
+    conn.commit()
+    return redirect('/testpage/change')
+
+def change_TPS(request):
+    args = {}
+    args.update(csrf(request))
+    print('TPS')
+    if request.method == "POST":
+        print(request.POST)
+        t=request.POST.get('t')
+        ek1=float(request.POST.get('ek1'))
+        ek2=float(request.POST.get('ek2'))
+        ek3=float(request.POST.get('ek3'))
+        ek4=float(request.POST.get('ek4'))
+        ek5=float(request.POST.get('ek5'))
+        ek6=float(request.POST.get('ek6'))
+        ek7=float(request.POST.get('ek7'))
+        ek8=float(request.POST.get('ek8'))
+        ek9=float(request.POST.get('ek9'))
+        ek10=float(request.POST.get('ek10'))
+        ek11=float(request.POST.get('ek11'))
+        ek12=float(request.POST.get('ek12'))
+        ek13=float(request.POST.get('ek13'))
+        ek14=float(request.POST.get('ek14'))
+        ek15=float(request.POST.get('ek15'))
+        ek16=float(request.POST.get('ek16'))
+        ek17=float(request.POST.get('ek17'))
+        ek18=float(request.POST.get('ek18'))
+        ek19=float(request.POST.get('ek19'))
+        ek20=float(request.POST.get('ek20'))
+        ek21=float(request.POST.get('ek21'))
+        ek22=float(request.POST.get('ek22'))
+        ek23=float(request.POST.get('ek23'))
+        ek24=float(request.POST.get('ek24'))
+        hct=float(request.POST.get('hct'))
+        n1=int(request.POST.get('n1'))
+        no1=int(request.POST.get('no1'))
+        an1=request.POST.get('an1')
+        an1=parseArr(an1)
+        an2=request.POST.get('an2')
+        an2=parseArr(an2)
+
+    query = 'INSERT INTO "TPS" VALUES (default, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s);'
+    data = (t, ek1, ek2, ek3, ek4, ek5, ek6, ek7, ek8, ek9, ek10, ek11, ek12,ek13,ek14,ek15,ek16,ek17,ek18,ek19,ek20,ek21,ek22,ek23,ek24,hct,n1,no1, an1,an2)
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute(query, data)
+    conn.commit()
+    return redirect('/testpage/change')
+
+def change_VSP(request):
+    args = {}
+    args.update(csrf(request))
+    print('TPS')
+    if request.method == "POST":
+        v=request.POST.get('v')
+        put1 = float(request.POST.get('put1'))
+        put2 = float(request.POST.get('put2'))
+        put3 = float(request.POST.get('put3'))
+        put4 = float(request.POST.get('put4'))
+        put5 = float(request.POST.get('put5'))
+        put6 = float(request.POST.get('put6'))
+        put7 = float(request.POST.get('put7'))
+        put8 = float(request.POST.get('put8'))
+        put9 = float(request.POST.get('put9'))
+        put10 = float(request.POST.get('put10'))
+        put11 = float(request.POST.get('put11'))
+        put12 = float(request.POST.get('put12'))
+        put13 = float(request.POST.get('put13'))
+        put14 = float(request.POST.get('put14'))
+        put15 = float(request.POST.get('put15'))
+        put16 = float(request.POST.get('put16'))
+        put17 = float(request.POST.get('put17'))
+        put18 = float(request.POST.get('put18'))
+        put19 = float(request.POST.get('put19'))
+        put20 = float(request.POST.get('put20'))
+        put21 = float(request.POST.get('put21'))
+        put22 = float(request.POST.get('put22'))
+        put23 = float(request.POST.get('put23'))
+        put24 = float(request.POST.get('put24'))
+        put25 = float(request.POST.get('put25'))
+        put26 = float(request.POST.get('put26'))
+        put27 = float(request.POST.get('put27'))
+        put28 = float(request.POST.get('put28'))
+        put29 = float(request.POST.get('put29'))
+        put30 = float(request.POST.get('put30'))
+        put31 = float(request.POST.get('put31'))
+        put32 = float(request.POST.get('put33'))
+        put33 = float(request.POST.get('put33'))
+
+    query = 'INSERT INTO "VSP" VALUES (default, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);'
+    data = (v, put1, put2, put3, put4, put5, put6, put7, put8, put9, put10, put11, put12, put13, put14, put15, put16, put17, put18, put19, put20,
+put21, put22, put23, put24,put25, put26, put27, put28, put29,put30, put31, put32, put33)
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute(query, data)
+    conn.commit()
+    return redirect('/testpage/change')
