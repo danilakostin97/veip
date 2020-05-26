@@ -151,123 +151,123 @@
 {% csrf_token %}
      <div class="field">
           <label>Наименование подвижного состава</label>
-          <input type="text" name="t">
+          <input type="text" name="t" value="{{ t_val }}">
      </div>
      <div class="field">
            <label>Жесткость поперечной связи между колесной парой и тележкой, кН/м</label>
-           <input type="number" step="any" min="0" name="ek1">
+           <input type="number" step="any" min="0" name="ek1" value="{{ ek1_val }}">
      </div>
      <div class="field">
          <label>Жесткость поперечной связи между кузовом и тележкой, кН/м</label>
-         <input type="number" step="any" min="0" name="ek2">
+         <input type="number" step="any" min="0" name="ek2" value="{{ ek2_val }}">
      </div>
      <div class="field">
          <label>Жесткость надбуксовой ступени подвешивания, кН/м</label>
-         <input type="number" step="any" min="0" name="ek3">
+         <input type="number" step="any" min="0" name="ek3" value="{{ ek3_val }}">
      </div>
      <div class="field">
            <label>Жесткость центральной ступени подвешивания, кН/м</label>
-           <input type="number" step="any" min="0" name="ek4">
+           <input type="number" step="any" min="0" name="ek4" value="{{ ek4_val }}">
      </div>
      <div class="field">
          <label>Угловая жесткость поворота колесной пары относительно тележки, кН*м</label>
-         <input type="number"  step="any" min="0" name="ek5">
+         <input type="number"  step="any" min="0" name="ek5" value="{{ ek5_val }}">
      </div>
      <div class="field">
          <label>Угловая жесткость поворота тележки относительно кузова,кН*м</label>
-         <input type="number" step="any" min="0" name="ek6">
+         <input type="number" step="any" min="0" name="ek6" value="{{ ek6_val }}">
      </div>
      <div class="field">
            <label>Масса колесной пары, кг</label>
-           <input type="number" step="any" min="0" name="ek7">
+           <input type="number" step="any" min="0" name="ek7" value="{{ ek7_val }}">
      </div>
      <div class="field">
          <label>Масса рамы тележки, кг</label>
-         <input type="number" step="any" min="0" name="ek8">
+         <input type="number" step="any" min="0" name="ek8" value="{{ ek8_val }}">
      </div>
      <div class="field">
          <label>Масса рамы тележки, кг</label>
-         <input type="number" step="any" min="0" name="ek9">
+         <input type="number" step="any" min="0" name="ek9" value="{{ ek9_val }}">
      </div>
      <div class="field">
            <label>Статическая нагрузка на колесо, кН</label>
-           <input type="number" step="any" min="0" name="ek10">
+           <input type="number" step="any" min="0" name="ek10" value="{{ ek10_val }}">
      </div>
      <div class="field">
          <label>Эффективная конусность бандажа</label>
-         <input type="number" step="any" min="0" name="ek11">
+         <input type="number" step="any" min="0" name="ek11" value="{{ ek11_val }}">
      </div>
      <div class="field">
          <label>Радиус колеса, м</label>
-         <input type="number" step="any" min="0" name="ek12">
+         <input type="number" step="any" min="0" name="ek12" value="{{ ek12_val }}">
      </div>
      <div class="field">
            <label>Расстояние от центра качаний до центра масс кузова,м</label>
-           <input type="number" step="any" min="0" name="ek13">
+           <input type="number" step="any" min="0" name="ek13" value="{{ ek13_val }}">
      </div>
      <div class="field">
          <label>Половина поперечного расстояния между рессорными комплектами,м</label>
-         <input type="number" step="any" min="0" name="ek14">
+         <input type="number" step="any" min="0" name="ek14" value="{{ ek14_val }}">
      </div>
      <div class="field">
          <label>Центральный момент инерции колесной пары относительно вертикальной оси, кг*m**2</label>
-         <input type="number" step="any" min="0" name="ek15">
+         <input type="number" step="any" min="0" name="ek15" value="{{ ek15_val }}">
      </div>
      <div class="field">
            <label>Центральный момент инерции рамы тележки относительно вертикальной оси, кг*m**2</label>
-           <input type="number" step="any" min="0" name="ek16">
+           <input type="number" step="any" min="0" name="ek16" value="{{ ek16_val }}">
      </div>
      <div class="field">
          <label>Центральный момент инерции рамы тележки относительно горизонтальной поперечной оси, кг*m**2</label>
-         <input type="number" step="any" min="0" name="ek17">
+         <input type="number" step="any" min="0" name="ek17" value="{{ ek17_val }}">
      </div>
      <div class="field">
          <label>Центральный момент инерции кузова относительно вертикальной оси, кг*m**2</label>
-         <input type="number" step="any" min="0" name="ek18">
+         <input type="number" step="any" min="0" name="ek18" value="{{ ek18_val }}">
      </div>
      <div class="field">
            <label>Центральный момент инерции относительно горизонтальной продольной оси, кг*m**2</label>
-           <input type="number" step="any" min="0" name="ek19">
+           <input type="number" step="any" min="0" name="ek19" value="{{ ek19_val }}">
      </div>
      <div class="field">
          <label>Центральный момент инерции относительно горизонтальной-поперечной оси, кг*m**2</label>
-         <input type="number" step="any" min="0" name="ek20">
+         <input type="number" step="any" min="0" name="ek20" value="{{ ek20_val }}">
      </div>
      <div class="field">
          <label>Коэффициент демпфирования поперечной связи тележки с кузовом, кН*c/m</label>
-         <input type="number" step="any" min="0" name="ek21">
+         <input type="number" step="any" min="0" name="ek21" value="{{ ek21_val }}">
      </div>
      <div class="field">
            <label>Коэффициент демпфирования в надбуксовой ступени подвешивания, кН*c/m</label>
-           <input type="number" step="any" min="0" name="ek22">
+           <input type="number" step="any" min="0" name="ek22" value="{{ ek22_val }}">
      </div>
      <div class="field">
          <label>Коэффициент демпфирования в центральной ступени подвешивания, кН*c/m</label>
-         <input type="number" step="any" min="0" name="ek23">
+         <input type="number" step="any" min="0" name="ek23" value="{{ ek23_val }}">
      </div>
      <div class="field">
          <label>Коэффициент углового демпфирования при повороте тележки относительно кузова</label>
-         <input type="number" step="any" min="0" name="ek24">
+         <input type="number" step="any" min="0" name="ek24" value="{{ ek24_val }}">
      </div>
        <div class="field">
          <label>Расстояние от центра</label>
-         <input type="number" step="any" min="0" name="hct">
+         <input type="number" step="any" min="0" name="hct" value="{{ hct_val }}">
      </div>
              <div class="field">
          <label>Число тележек</label>
-         <input type="number" step="any" min="0" name="n1">
+         <input type="number" step="any" min="0" name="n1" value="{{ n1_val }}">
      </div>
              <div class="field">
          <label>Число осей в тележке</label>
-         <input type="number" step="any" min="0" name="no1">
+         <input type="number" step="any" min="0" name="no1" value="{{ no1_val }}">
      </div>
              <div class="field">
          <label>Координаты точек подвешивания тележек, м</label>
-         <input type="text" name="an1">
+         <input type="text" name="an1" value="{{ an1_val }}">
      </div>
              <div class="field">
          <label>Координаты точек подвешивания колёсных пар, м</label>
-         <input type="text" name="an2">
+         <input type="text" name="an2" value="{{ an2_val }}">
      </div>
               <button type="submit"  class="button">Добавить</button>
     </form>
@@ -292,26 +292,29 @@
           {% csrf_token %}
           <div class="field">
            <label>Наименование пути</label>
-         <input type="text" name="name_spkh">
+         <input type="text" name="name_spkh" value="{{ name_spkh_val }}">
      </div>
           <div class="field">
            <label>Количество точек в таблице, описывающей спектральные плотности неровностей пути в горизонтальной плоскости</label>
-           <input type="number" step="any" min="0" name="nomh">
+           <input type="number" step="any" min="0" name="nomh" value="{{ nomh_val }}">
      </div>
           <div class="field">
            <label>Вектор частот, 2*3.14/м</label>
-         <input type="text" name="f">
+         <input type="text" name="f" value="{{ f_val }}">
      </div>
           <div class="field">
            <label>Вектор спектральных плотностей неровностей пути в плане m**3/(2*3.14)</label>
-         <input type="text" name="fp">
+         <input type="text" name="fp" value="{{ fp_val }}">
      </div>
           <div class="field">
            <label>Вектор спектральных плотностей неровностей пути по уровню m**3/(2*3.14)</label>
-         <input type="text" name="fh">
+         <input type="text" name="fh" value="{{ fh_val }}">
      </div>
               <button type="submit" class="button">Добавить</button>
       </form>
+     {% if alert_flag %}
+    <script>alert("Ошибка при вводе: {{ alert_flag }}")</script>
+{% endif %}
  </div>
  </div>
  </div>
@@ -332,27 +335,27 @@
           {% csrf_token %}
           <div class="field">
            <label>Наименование ка</label>
-         <input type="text" name="name_spkv">
+         <input type="text" name="name_spkv" value="{{ name_spkv_val }}">
      </div>
           <div class="field">
            <label>Количество точек в таблице, описывающей спектральные плотности неровностей пути и колес в вертикальной плоскости.</label>
-           <input type="number" step="any" min="0" name="nomv">
+           <input type="number" step="any" min="0" name="nomv" value="{{ nomv_val }}">
      </div>
           <div class="field">
            <label>Вектор частот, 2*3.14/м</label>
-         <input type="text" name="s">
+         <input type="text" name="s" value="{{ s_val }}">
      </div>
           <div class="field">
            <label>Вектор спектральных плотностей неровностей пути в продольном профиле, см**3/(2*3.14)</label>
-         <input type="text" name="s1">
+         <input type="text" name="s1" value="{{ s1_val }}">
      </div>
           <div class="field">
            <label>Вектор спектральных плотностей неровностей на поверхности катания колеса, см**3/(2*3.14)</label>
-         <input type="text" name="s2">
+         <input type="text" name="s2" value="{{ s2_val }}">
      </div>
             <div class="field">
            <label>Вектор спектральных плотностей зазоров между рельсом и основанием, см**3/(2*3.14)</label>
-         <input type="text" name="s3">
+         <input type="text" name="s3" value="{{ s3_val }}">
      </div>
               <button type="submit"  class="button">Добавить</button>
       </form>
@@ -376,37 +379,37 @@
           {% csrf_token %}
            <div class="field">
            <label>Наименование</label>
-         <input type="text" name="name_ekip">
+         <input type="text" name="name_ekip" value="{{ name_ekip_val }}">
      </div>
           <div class="field">
            <label>Число характерных точек кузова, заданных в таблице набора данных</label>
-           <input type="number" step="any" min="0" name="ikus">
+           <input type="number" step="any" min="0" name="ikus" value="{{ ikus_val }}">
      </div>
           <div class="field">
            <label>Вектор координат характерных точек кузова</label>
-         <input type="text" name="xkus">
-              <input type="text" name="ykus">
-              <input type="text" name="zkus">
+         <input type="text" name="xkus" value="{{ xkus_val }}">
+              <input type="text" name="ykus" value="{{ ykus_val }}">
+              <input type="text" name="zkus" value="{{ zkus_val }}">
      </div>
           <div class="field">
            <label>Число характерных точек первой тележки в таблице набора данных</label>
-         <input type="number" name="itel1">
+         <input type="number" name="itel1" value="{{ itel1_val }}">
      </div>
           <div class="field">
            <label>Вектора координат характерных точек</label>
-         <input type="text" name="xtel1">
-            <input type="text" name="ytel1">
-              <input type="text" name="ztel1">
+         <input type="text" name="xtel1" value="{{ xtel1_val }}">
+            <input type="text" name="ytel1" value="{{ ytel1_val }}">
+              <input type="text" name="ztel1" value="{{ ztel1_val }}">
      </div>
           <div class="field">
            <label>Число характерных точек второй тележки в таблице набора данных</label>
-         <input type="number" name="itel2">
+         <input type="number" name="itel2" value="{{ itel2_val }}">
      </div>
             <div class="field">
            <label>Вектора координат характерных точек второй тележки</label>
-         <input type="text" name="xtel2">
-                <input type="text" name="ytel2">
-                <input type="text" name="ztel2">
+         <input type="text" name="xtel2" value="{{ xtel2_val }}">
+                <input type="text" name="ytel2" value="{{ ytel2_val }}">
+                <input type="text" name="ztel2" value="{{ ztel2_val }}">
      </div>
               <button type="submit"  class="button">Добавить</button>
       </form>
@@ -430,139 +433,139 @@
 {% csrf_token %}
      <div class="field">
           <label>Наименование конструкции верхнего строения пути</label>
-          <input type="text" name="v">
+          <input type="text" name="v" value="{{ v_val }}">
      </div>
              <div class="field">
           <label>Модуль упругости рельсовой стали, кгс/см**2</label>
-          <input type="number" name="put1">
+          <input type="number" name="put1" value="{{ put1_val }}">
      </div>
               <div class="field">
           <label>Жесткость в контакте рельса и колеса, кгс/см</label>
-          <input type="number" name="put2">
+          <input type="number" name="put2" value="{{ put2_val }}">
      </div>
-                 <div class="field">
+      <div class="field">
           <label>Высота рельса, см</label>
-          <input type="number" name="put3">
+          <input type="number" name="put3" value="{{ put3_val }}">
      </div>
               <div class="field">
           <label>Расстояние от нейтральной оси до нижней грани подошвы рельса, см</label>
-          <input type="number" name="put4">
+          <input type="number" name="put4" value="{{ put4_val }}">
      </div>
              <div class="field">
           <label>Расстояние от центра кручения до нижней грани подошвы рельса, см</label>
-          <input type="number" name="put5">
+          <input type="number" name="put5" value="{{ put5_val }}">
      </div>
               <div class="field">
           <label>Расстояние между центрами тяжести сечений головки и подошвы, см</label>
-          <input type="number" name="put6">
+          <input type="number" name="put6" value="{{ put6_val }}">
      </div>
                  <div class="field">
           <label>Ширина головки, см</label>
-          <input type="number" name="put7">
+          <input type="number" name="put7" value="{{ put7_val }}">
      </div>
               <div class="field">
           <label>Ширина подошвы, см</label>
-          <input type="number" name="put8">
+          <input type="number" name="put8" value="{{ put8_val }}">
      </div>
                  <div class="field">
           <label>Момент инерции поперечного сечения рельса относительно главной вертикальной оси, см**4</label>
-          <input type="number" name="put9">
+          <input type="number" name="put9" value="{{ put9_val }}">
      </div>
               <div class="field">
           <label>Момент инерции поперечного сечения головки рельса относительно главной вертикальной оси, см**4</label>
-          <input type="number" name="put10">
+          <input type="number" name="put10" value="{{ put10_val }}">
      </div>
                  <div class="field">
           <label>Момент инерции поперечного сечения подошвы рельса относительно главной вертикальной оси, см**4</label>
-          <input type="number" name="put11">
+          <input type="number" name="put11" value="{{ put11_val }}">
      </div>
               <div class="field">
           <label>Момент инерции поперечного сечения рельса относительно поперечной нейтральной оси рельса, см**4</label>
-          <input type="number" name="put12">
+          <input type="number" name="put12" value="{{ put12_val }}">
      </div>
              <div class="field">
           <label>Распределенный полярный момент инерции рельса относительно центра кручения, кгс*см**2</label>
-          <input type="number" name="put13">
+          <input type="number" name="put13" value="{{ put13_val }}">
      </div>
               <div class="field">
           <label>Приведенная жесткость головки и подошвы рельса на изгиб, кгс*см**2</label>
-          <input type="number" name="put14">
+          <input type="number" name="put14" value="{{ put14_val }}">
      </div>
                  <div class="field">
           <label>Жесткость рельса на кручение, кгс*см**2</label>
-          <input type="number" name="put15">
+          <input type="number" name="put15" value="{{ put15_val }}">
      </div>
               <div class="field">
           <label>Длина шпалы, см</label>
-          <input type="number" name="put16">
+          <input type="number" name="put16" value="{{ put16_val }}">
      </div>
               <div class="field">
           <label>Ширина нижней постели шпалы, см</label>
-          <input type="number" name="put17">
+          <input type="number" name="put17" value="{{ put17_val }}">
      </div>
               <div class="field">
           <label>Коэффициент изгиба шпалы</label>
-          <input type="number" name="put18">
+          <input type="number" name="put18" value="{{ put18_val }}">
      </div>
                  <div class="field">
           <label>Масса шпалы, кгс*с**2/см</label>
-          <input type="number" name="put19">
+          <input type="number" name="put19" value="{{ put19_val }}">
      </div>
               <div class="field">
           <label>Расстояние между шпалами, см</label>
-          <input type="number" name="put20">
+          <input type="number" name="put20" value="{{ put20_val }}">
      </div>
              <div class="field">
           <label>Модуль упругости подрельсового основания в горизонтальной плоскости, кгс/см**2</label>
-          <input type="number" name="put21">
+          <input type="number" name="put21" value="{{ put21_val }}">
      </div>
               <div class="field">
           <label>Модуль упругости подрельсового основания в вертикальной плоскости, кгс/см**2</label>
-          <input type="number" name="put22">
+          <input type="number" name="put22" value="{{ put22_val }}">
      </div>
                  <div class="field">
           <label>Модуль упругости подрельсового основания в отношении кручения рельса, кгс/рад</label>
-          <input type="number" name="put23">
+          <input type="number" name="put23" value="{{ put23_val }}">
      </div>
               <div class="field">
           <label>Приведенная к рельсу распределенная масса пути при поперечных колебаниях, кгс*с**2/см**2</label>
-          <input type="number" name="put24">
+          <input type="number" name="put24" value="{{ put24_val }}">
      </div>
                  <div class="field">
           <label>Приведенная к рельсу распределенная масса пути при вертикальных колебаниях, кгс*с**2/см**2</label>
-          <input type="number" name="put25">
+          <input type="number" name="put25" value="{{ put25_val }}">
      </div>
               <div class="field">
           <label>Распределенное демпфирование пути при поперечных колебаниях, кгс*с/см**2</label>
-          <input type="number" name="put26">
+          <input type="number" name="put26" value="{{ put26_val }}">
      </div>
                  <div class="field">
           <label>Распределенное демпфирование пути при вертикальных колебаниях, кгс*с/см**2</label>
-          <input type="number" name="put27">
+          <input type="number" name="put27" value="{{ put27_val }}">
      </div>
               <div class="field">
           <label>Распределенное демпфирование пути при крутильных колебаниях, кгс*с/см**2</label>
-          <input type="number" name="put28">
+          <input type="number" name="put28" value="{{ put28_val }}">
      </div>
              <div class="field">
           <label>Коэффициент демпфирования пути при вертикальных колебаниях на уровне нижней постели шпалы, кгс*с/см</label>
-          <input type="number" name="put29">
+          <input type="number" name="put29" value="{{ put29_val }}">
      </div>
               <div class="field">
           <label>Коэффициент демпфирования в узле скрепления, кгс*с/см</label>
-          <input type="number" name="put30">
+          <input type="number" name="put30" value="{{ put30_val }}">
      </div>
                  <div class="field">
           <label>Жесткость основания по нижней постели шпалы, кгс/см</label>
-          <input type="number" name="put31">
+          <input type="number" name="put31" value="{{ put31_val }}">
      </div>
               <div class="field">
           <label>Жесткость узла скрепления, кгс/см</label>
-          <input type="number" name="put32">
+          <input type="number" name="put32" value="{{ put32_val }}">
      </div>
               <div class="field">
           <label>Толщина балласта под шпалой, см</label>
-          <input type="number" name="put33">
+          <input type="number" name="put33" value="{{ put33_val }}">
      </div>
               <button type="submit"  class="button">Добавить</button>
          </form>

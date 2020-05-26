@@ -12,7 +12,7 @@ from . import veip_params1
 from string import digits
 import psycopg2
 import random
-
+import re
 
 
 def newd(request):
@@ -138,7 +138,9 @@ def calculations(request):
         return render(request,"calculations.html", context=data)
 
 def theory(request):
-    data = {"username": request.user.username, }
+    #print(re.search(r'[^\W\d]', 'someth111ing'))
+
+    data = {"username": request.user.username, 'alert_flag': True, }
     return render(request, "theory.html", context=data)
     # if request.user.is_authenticated:
     #     data = {"username": request.user.username, }
@@ -466,21 +468,28 @@ def change(request):
 def change_SPKH(request):
     args = {}
     args.update(csrf(request))
+
     if request.method == "POST":
         nomh=int(request.POST.get('nomh'))
         name_spkh=request.POST.get('name_spkh')
         f=request.POST.get('f')
-        f=str(f)
-        f=f.split(',')
-        f = list(map(float, f))
         fp=request.POST.get('fp')
-        fp = str(fp)
-        fp = fp.split(',')
-        fp = list(map(float, fp))
         fh=request.POST.get('fh')
-        fh = str(fh)
-        fh = fh.split(',')
-        fh = list(map(float, fh))
+        print(name_spkh)
+    params=[f,fp,fh]
+    alert_flag=None
+    #print(re.search(r'[^\W\d]', '124.,43'))
+    for param in params:
+        if re.search(r'[^\W\d]', param) is not None:
+            alert_flag = param
+
+    if alert_flag is not None:
+        data = {"username": request.user.username, "name_spkh_val": name_spkh, "f_val": f, "fp_val": fp,
+                "fh_val": fh, "alert_flag": alert_flag, "nomh_val":nomh}
+        return render(request, "change_data.html", context=data)
+    f=parseArr(f)
+    fp = parseArr(fp)
+    fh = parseArr(fh)
     query = 'INSERT INTO "SPKH" VALUES (default, %s,%s, %s,%s, %s);'
     data = (name_spkh,nomh, f,fp, fh)
     conn = psycopg2.connect(dbname='veip', user='postgres',
@@ -490,6 +499,7 @@ def change_SPKH(request):
     conn.commit()
     return redirect('/testpage/change')
 
+
 def change_SPKV(request):
     args = {}
     args.update(csrf(request))
@@ -497,21 +507,24 @@ def change_SPKV(request):
         name_spkv=request.POST.get('name_spkv')
         nomv=request.POST.get('nomv')
         s=request.POST.get('s')
-        s=str(s)
-        s=s.split(',')
-        s = list(map(float, s))
         s1=request.POST.get('s1')
-        s1=str(s1)
-        s1 = s1.split(',')
-        s1 = list(map(float, s1))
         s2=request.POST.get('s2')
-        s2=str(s2)
-        s2 = s2.split(',')
-        s2 = list(map(float, s2))
         s3=request.POST.get('s3')
-        s3=str(s3)
-        s3 = s3.split(',')
-        s3 = list(map(float, s3))
+
+        params = [s, s1, s2,s3]
+        alert_flag = None
+        for param in params:
+            if re.search(r'[^\W\d]', param) is not None:
+                alert_flag = param
+
+        if alert_flag is not None:
+            data = {"username": request.user.username, "name_spkv_val": name_spkv, "nomv_val": nomv, "s_val": s,
+                    "s1_val": s1, "alert_flag": alert_flag, "s2_val": s2, "s3_val":s3}
+            return render(request, "change_data.html", context=data)
+        s=parseArr(s)
+        s1 = parseArr(s1)
+        s2 = parseArr(s2)
+        s3 = parseArr(s3)
         query = 'INSERT INTO "SPKV" VALUES (default, %s,%s, %s,%s,%s,%s);'
         data = (name_spkv, nomv, s, s1, s2,s3)
         conn = psycopg2.connect(dbname='veip', user='postgres',
@@ -535,30 +548,38 @@ def change_EKIP(request):
         ikus=int(request.POST.get('ikus'))
 
         xkus= request.POST.get('xkus')
-        xkus=parseArr(xkus)
         ykus= request.POST.get('ykus')
-        ykus=parseArr(ykus)
         zkus= request.POST.get('zkus')
-        zkus=parseArr(zkus)
-
         itel1= int(request.POST.get('itel1'))
-
         xtel1= request.POST.get('xtel1')
-        xtel1=parseArr(xtel1)
         ytel1= request.POST.get('ytel1')
-        ytel1 = parseArr(ytel1)
         ztel1= request.POST.get('ztel1')
-        ztel1=parseArr(ztel1)
-
         itel2 = int(request.POST.get('itel2'))
-
         xtel2 = request.POST.get('xtel2')
-        xtel2=parseArr(xtel2)
         ytel2 = request.POST.get('ytel2')
-        ytel2=parseArr(ytel2)
         ztel2 = request.POST.get('ztel2')
-        ztel2=parseArr(ztel2)
 
+    params = [xkus, ykus, zkus,xtel1,ytel1,ztel1,xtel2,ytel2,ztel2]
+    alert_flag = None
+    for param in params:
+        if re.search(r'[^\W\d]', param) is not None:
+            alert_flag = param
+
+    if alert_flag is not None:
+        data = {"username": request.user.username, "name_ekip_val":name_ekip, "ikus_val":ikus, "xkus_val":xkus, "ykus_val":ykus,
+                "zkus_val":zkus, "itel1_val":itel1,"xtel1_val":xtel1,"ytel1_val":ytel1,"ztel1_val":ztel1,
+                "itel2_val":itel2,"xtel2_val":xtel2,"ytel2_val":ytel2,"ztel2_val":ztel2,"alert_flag":alert_flag}
+        return render(request, "change_data.html", context=data)
+
+    xkus = parseArr(xkus)
+    ykus = parseArr(ykus)
+    zkus = parseArr(zkus)
+    xtel1 = parseArr(xtel1)
+    ytel1 = parseArr(ytel1)
+    ztel1 = parseArr(ztel1)
+    xtel2 = parseArr(xtel2)
+    ytel2 = parseArr(ytel2)
+    ztel2 = parseArr(ztel2)
     query = 'INSERT INTO "EKIP" VALUES (default, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s);'
     data = (name_ekip, ikus, xkus, ykus, zkus, itel1,xtel1,ytel1,ztel1, itel2,xtel2,ytel2,ztel2)
     conn = psycopg2.connect(dbname='veip', user='postgres',
@@ -603,10 +624,23 @@ def change_TPS(request):
         n1=int(request.POST.get('n1'))
         no1=int(request.POST.get('no1'))
         an1=request.POST.get('an1')
-        an1=parseArr(an1)
         an2=request.POST.get('an2')
-        an2=parseArr(an2)
 
+    params = [an1,an2]
+    alert_flag = None
+    for param in params:
+        if re.search(r'[^\W\d]', param) is not None:
+            alert_flag = param
+
+    if alert_flag is not None:
+        data = {"username": request.user.username, "t_val":t, "ek1_val":ek1, "ek2_val":ek2, "ek3_val":ek3, "ek4_val":ek4, "ek5_val":ek5,
+                "ek6_val":ek6, "ek7_val":ek7, "ek8_val":ek8, "ek9_val":ek9, "ek10_val":ek10, "ek11_val":ek11, "ek12_val":ek12,"ek13_val":ek13,"ek14_val":ek14,
+                "ek15_val":ek15,"ek16_val":ek16,"ek17_val":ek17,"ek18_val":ek18,"ek19_val":ek19,"ek20_val":ek20,"ek21_val":ek21,"ek22_val":ek22,"ek23_val":ek23,
+                "ek24_val":ek24,"hct_val":hct,"n1_val":n1,"no1_val":no1, "an1_val":an1,"an2_val":an2, "alert_flag": alert_flag}
+        return render(request, "change_data.html", context=data)
+
+    an1 = parseArr(an1)
+    an2 = parseArr(an2)
     query = 'INSERT INTO "TPS" VALUES (default, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s, %s,%s, %s,%s,%s,%s, %s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s);'
     data = (t, ek1, ek2, ek3, ek4, ek5, ek6, ek7, ek8, ek9, ek10, ek11, ek12,ek13,ek14,ek15,ek16,ek17,ek18,ek19,ek20,ek21,ek22,ek23,ek24,hct,n1,no1, an1,an2)
     conn = psycopg2.connect(dbname='veip', user='postgres',
