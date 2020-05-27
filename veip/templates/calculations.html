@@ -102,11 +102,13 @@
         padding: 10px;
        float: left;
 }
-    .field {clear:both; text-align:right; padding-left: 35%; padding-right: 35%; margin: 5px}
+    .list {padding-left: 30%;}
+    .field {clear:both; text-align:right; padding-left: 30%; padding-right: 30%; margin: 5px;}
     label {float:left; }
     .main_inp {float:left; width:100%;}
-    .button {float:right;  margin-right: 35%;}
-    input{ width: 20%}
+    .button {float:right;  margin-right: 30%;}
+    input{ width: 20%;}
+    select{width: 57%;}
 </style>
 
 </head>
@@ -151,15 +153,21 @@
    {% csrf_token %}
        <div class="input_data">
         <div class="field">
-    <label> Номер выбранного набора данных в файле TPS </label>
-     <select name="tps" id="tps">
+    <label> Тип подвижного состава </label><br>
+        </div>
+        <div class="list">
+            <select name="tps" id="tps">
        {% for type in tps %}
        <option>{{ type }}</option>
        {% endfor %}
      </select>
-    </div>
+        </div>
+
+
        <div class="field">
-    <label> Номер выбранного набора данных в файле VSP </label>
+    <label> Конструкция верхнего строения пути </label><br>
+       </div>
+       <div class="list">
      <select name="vsp" id="vsp">
        {% for type in vsp %}
        <option>{{ type }}</option>
@@ -167,7 +175,9 @@
      </select>
     </div>
      <div class="field">
-    <label> Номер выбранного набора данных в файле SPKH </label>
+    <label> Спектральные плотности неровностей пути в горизонтальной плоскости</label><br>
+       </div>
+       <div class="list">
      <select name="spkh" id="spkh">
        {% for type in spkh %}
        <option>{{ type }}</option>
@@ -175,7 +185,9 @@
      </select>
      </div>
        <div class="field">
-    <label> Номер выбранного набора данных в файле SPKV </label>
+    <label> Спектральные плотности неровностей пути в вертикальной плоскости </label><br>
+       </div>
+       <div class="list">
      <select name="spkv" id="spkv">
        {% for type in spkv %}
        <option>{{ type }}</option>
@@ -183,7 +195,9 @@
      </select>
       </div>
        <div class="field">
-    <label> Номер выбранного набора данных в файле EKIP </label>
+    <label> Характерные точки кузова </label><br>
+       </div>
+       <div class="list">
      <select name="ekip" id="ekip">
        {% for type in ekip %}
        <option>{{ type }}</option>
@@ -249,7 +263,9 @@
    {% csrf_token %}
        <div class="input_data">
         <div class="field">
-    <label> Номер выбранного набора данных в файле TPS </label>
+    <label> Тип подвижного состава </label><br>
+        </div>
+        <div class="list">
      <select name="tps" id="tpsm">
        {% for type in tps %}
        <option>{{ type }}</option>
@@ -257,7 +273,9 @@
      </select>
     </div>
        <div class="field">
-    <label> Номер выбранного набора данных в файле VSP </label>
+    <label> Конструкция верхнего строения пути </label><br>
+        </div>
+        <div class="list">
      <select name="vsp" id="vspm">
        {% for type in vsp %}
        <option>{{ type }}</option>
@@ -265,7 +283,9 @@
      </select>
     </div>
      <div class="field">
-    <label> Номер выбранного набора данных в файле SPKH </label>
+    <label> Спектральные плотности неровностей пути в горизонтальной плоскости </label><br>
+        </div>
+        <div class="list">
      <select name="spkh" id="spkh">
        {% for type in spkh %}
        <option>{{ type }}</option>
@@ -273,7 +293,9 @@
      </select>
      </div>
        <div class="field">
-    <label> Номер выбранного набора данных в файле SPKV </label>
+    <label> Спектральные плотности неровностей пути в вертикальной плоскости </label><br>
+        </div>
+        <div class="list">
      <select name="spkv" id="spkv">
        {% for type in spkv %}
        <option>{{ type }}</option>
@@ -281,7 +303,9 @@
      </select>
       </div>
        <div class="field">
-    <label> Номер выбранного набора данных в файле EKIP </label>
+    <label> Характерные точки кузова </label><br>
+        </div>
+        <div class="list">
      <select name="ekip" id="ekip">
        {% for type in ekip %}
        <option>{{ type }}</option>

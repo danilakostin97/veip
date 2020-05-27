@@ -23,25 +23,27 @@ def getHistory():
     conn = psycopg2.connect(dbname='veip', user='postgres',
                             password='postgres', host='localhost')
     cursor = conn.cursor()
-    cursor.execute('''select * from "input"''')
+    cursor.execute('''select * from (select distinct "id_input" from "result") t1, "input" where t1.id_input=input.id''')
     dataInput = []
     for row in cursor:
         inp=[]
-        for i in range(0,17):
+        for i in range(1,18):
             inp.append(row[i])
-        inp.append(row[17])
+        inp.append(row[18])
         inp.append(0)
         dataInput.append(inp)
-    cursor.execute('''select * from (select t1."parent_id", max(t1."cl(9)"), min(t2."cl(9)") from (select * from "input" where "parent_id">0) t1
-left join (select * from "input" where "parent_id"=0) t2 on t1."parent_id"=t2."id" group by t1.parent_id) tspeed left join  "input" on input.id=tspeed.parent_id;''')
+    cursor.execute('''select * from (select distinct "id_input" from "result") t3,  
+(select * from (select t1."parent_id", max(t1."cl(9)"), min(t2."cl(9)") from (select * from "input" where "parent_id">0) t1 
+left join (select * from "input" where "parent_id"=0) t2 on t1."parent_id"=t2."id" group by t1.parent_id) tspeed left join  
+"input" on input.id=tspeed.parent_id) tmul where t3.id_input=tmul.id;''')
     for row in cursor:
         inp=[]
-        for i in range(3,19):
+        for i in range(4,20):
             inp.append(row[i])
-        speedmin=str(row[2])+'-'+str(row[1])
+        speedmin=str(row[3])+'-'+str(row[2])
         inp.append(speedmin)
-        inp.append(row[1])
         inp.append(row[2])
+        inp.append(row[3])
         dataInput.append(inp)
     return dataInput
 
