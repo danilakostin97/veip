@@ -32,8 +32,6 @@
         padding: 10px;
        float: left;
 }
-      /*    .field {clear:both; text-align:right;line-height:25px;}*/
-      /*.input_data {float:left}*/
 </style>
 </head>
 <body>
@@ -63,17 +61,6 @@
     <div class="row">
         <table class="table">
 
-
-{#    <thead>#}
-{#    <tr>#}
-{#        <th>ID</th>#}
-{#        <th>Логин</th>#}
-{#        <th>Тип поезда</th>#}
-{#        <th>Тип пути</th>#}
-{#        <th>Скорость м/с</th>#}
-{#        <th></th>#}
-{#    </tr>#}
-{#    </thead>#}
     <tbody>
     {% for id,user,time,tps,vsp,spkh,spkv,ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed,speedl,speedh in inputdata %}
    <form action="/testpage/viewres" method="post">
@@ -99,7 +86,6 @@
                 <input name="speedl" value="{{ speedl }}" type="hidden">
                 <input name="speedh" value="{{ speedh }}" type="hidden">
             </th>
-{#            <th>{{ status }}</th>#}
             <th><button type="submit" >Результат</button></th>
         </tr>
     </form>

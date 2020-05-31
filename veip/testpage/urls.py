@@ -7,7 +7,6 @@ urlpatterns = [
     url(r'^$', views.newd),
     url(r'^crt', views.pdf),
     url(r'^res', views.res, name='index'),
-    # url(r'^test', views.newd),
     url(r'^history', views.history),
     url(r'^rsult',views.resset),
     url(r'^multirsult',views.multires),

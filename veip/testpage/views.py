@@ -1,5 +1,4 @@
 import os
-import json
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -7,7 +6,6 @@ from django.template.loader import get_template
 import datetime
 from xhtml2pdf import pisa
 from django.template.context_processors import csrf
-from . import veip_params
 from . import veip_params1
 from string import digits
 import psycopg2
@@ -75,7 +73,6 @@ def findRes(tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed):
     ''', {'id_tps': id_tps, 'id_vsp': id_vsp, 'id_spkh': id_spkh, 'id_spkv': id_spkv, 'id_ekip': id_ekip, 'rk': rk,
           'rmk': rmk, 'voz': voz,
           'krip': krip, 'gor': gor, 'pol': pol, 'ugl': ugl, 'skrip': skrip, 'speed': speed})
-    #print(cursor.rowcount)
     if cursor.rowcount > 0:
         id_of_new_row = cursor.fetchone()[0]
         cursor.execute(
@@ -113,7 +110,6 @@ def parseData(data,param, id_input):
 
 def calculations(request):
     if request.user.is_authenticated:
-        ### ПОДКЛЮЧЕНИЕ К БД ###
 
         conn = psycopg2.connect(dbname='veip', user='postgres',
                                 password='postgres', host='localhost')
@@ -130,30 +126,15 @@ def calculations(request):
         ekip = getDataFromCur(cursor)
         inputdata=getHistory()
         data = {"username": request.user.username, "inputdata":inputdata, "tps":tps, "vsp":vsp, "spkh":spkh, "spkv":spkv, "ekip":ekip }
-        # test = [[1, 0.02, 0.03, 60], [2, 0.201, 0.045, 60], [3, 0.02556, 0.005, 60], [4, 0.546, 0.02, 60]]
-        # test2=[[5, 0.02, 0.03, 60], [6, 0.201, 0.045, 60], [7, 0.02556, 0.005, 60], [8, 0.546, 0.02, 60]]
-        # data2={'test':test, 'test2':test2}
-        # value='test'
-        # print(data2[value])
-        # for row in data2[value]:
-        #     print(row[0])
         return render(request,"calculations.html", context=data)
 
 def theory(request):
-    #print(re.search(r'[^\W\d]', 'someth111ing'))
 
     data = {"username": request.user.username, 'alert_flag': True, }
     return render(request, "theory.html", context=data)
-    # if request.user.is_authenticated:
-    #     data = {"username": request.user.username, }
-    #     return render(request,"theory.html", context=data)
 
 def history(request):
     if request.user.is_authenticated:
-        # test
-        # inputdata = [["Vag", "on", "ed", "et", 5, 6, 7, 8, 9, 10, 11, 12, 13, "Готово"]]
-        # inputdata.append(["Pri", "exal", "vag", "on", 15, 16, 17, 18, 19, 20, 21, 22, "60..90", "В работе"])
-        #
         inputdata=getHistory()
         data = {"username": request.user.username, "inputdata": inputdata, }
         return render(request,"history.html", context=data)
@@ -184,7 +165,6 @@ def setInput(user_name, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,s
     conn.commit()
     return id_of_new_row
 
-#sozdat raschet
 def setCalc(user_name, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed, parent_id):
 
     conn = psycopg2.connect(dbname='veip', user='postgres',
@@ -253,7 +233,6 @@ def getRes(name, id_input):
     return  resAll
 
 def viewresult(request):
-    # sql poisk rezultata
     s = request.POST.get('speed')
     remove_digits = str.maketrans('', '', digits)
     res = s.translate(remove_digits)
@@ -271,16 +250,6 @@ def viewresult(request):
         aksb = getResMulti('aksb', parent_id)
         vzs = getResMulti('vzs', parent_id)
         q = getResMulti('q', parent_id)
-        # p = [[1, 0.02, 0.03, 60], [2, 0.201, 0.045, 60], [3, 0.02556, 0.005, 60], [4, 0.546, 0.02, 60]]
-        # onapr = [[1, 0.2, 0.02, 60], [2, 0.0201, 0.0045, 60], [3, 0.56, 0.05, 60], [4, 0.546, 0.02, 60]]
-        # y = [[1, 0.211, 0.025, 60], [2, 0.201, 0.045, 60], [3, 0.67, 0.25, 60], [4, 0.689, 0.2, 60]]
-        # ball = [[1, 0.3, 0.03, 60], [2, 0.31, 0.05, 60], [3, 0.756, 0.163, 60], [4, 0.946, 0.02, 60]]
-        # opzp = [[1, 0.21, 0.02, 60], [2, 0.201, 0.045, 60], [3, 0.156, 0.0075, 60], [4, 0.846, 0.12, 60]]
-        # aksr = [[1, 0.72, 0.2, 60], [2, 0.9201, 0.045, 60], [3, 0.564, 0.05, 60], [4, 0.526, 0.02, 60]]
-        # akss = [[1, 0.2, 0.02, 60], [2, 0.0201, 0.0045, 60], [3, 0.56, 0.05, 60], [4, 0.546, 0.02, 60]]
-        # aksb = [[1, 0.211, 0.025, 60], [2, 0.201, 0.045, 60], [3, 0.67, 0.25, 60], [4, 0.689, 0.2, 60]]
-        # vzs = [[1, 0.21, 0.02, 60], [2, 0.201, 0.045, 60], [3, 0.156, 0.0075, 60], [4, 0.846, 0.12, 60]]
-        # q = [[1, 0.72, 0.2, 60], [2, 0.9201, 0.045, 60], [3, 0.564, 0.05, 60], [4, 0.526, 0.02, 60]]
         datasolo = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
         return render(request,"multires.html", context=datasolo)
@@ -384,11 +353,6 @@ def multires(request):
                                     ugl, skrip,
                                     speed, parent_id)
 
-    #
-    # parent_id=setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedl,0)
-    # setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedl+diff,parent_id)
-    # setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedh-diff,parent_id)
-    # setCalc(request.user.username, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speedh,parent_id)
 
     p = getResMulti('p',parent_id)
     onapr = getResMulti('onapr',parent_id)

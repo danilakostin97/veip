@@ -24,7 +24,6 @@ urlpatterns = [
     path('auth/', include('loginsys.urls')),
     path('', include('loginsys.urls')),
     path('pdf/', include('testpage.urls')),
-    #path('history', include('testpage.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
 
 #Add Django site authentication urls (for login, logout, password management)
