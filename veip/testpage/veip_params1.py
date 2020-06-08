@@ -36,8 +36,8 @@ class cput():
         where id =%s; ''' % id_input)
         iekip = cursor.fetchone()[0]
 
-        cursor.execute('''  select "cl(1)","cl(2)","cl(3)","cl(4)",
-        "cl(5)","cl(6)","cl(7)","cl(8)","cl(9)"
+        cursor.execute('''  select "cl(9)","cl(1)","cl(2)","cl(3)","cl(4)",
+        "cl(5)","cl(6)","cl(7)","cl(8)"
         from "input"
         where id =%s;''' % id_input)
         c1 = list(cursor.fetchone())

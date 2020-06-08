@@ -212,7 +212,8 @@ def resset(request):
         vzs = getRes('vzs', id_of_new_row)
         q = getRes('q', id_of_new_row)
         data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
-                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, #"vzs": vzs
+                }
         return render(request, "restest.html", context=data)
 
 
@@ -237,9 +238,39 @@ def viewresult(request):
     remove_digits = str.maketrans('', '', digits)
     res = s.translate(remove_digits)
 
+    tps = request.POST.get('tps')
+    vsp = request.POST.get('vsp')
+    spkh = request.POST.get('spkh')
+    spkv = request.POST.get('spkv')
+    ekip = request.POST.get('ekip')
+    rk = request.POST.get('rk')
+    rmk = request.POST.get('rmk')
+    voz = request.POST.get('voz')
+    krip = request.POST.get('krip')
+    gor = request.POST.get('gor')
+    pol = request.POST.get('pol')
+    ugl = request.POST.get('ugl')
+    skrip = request.POST.get('skrip')
+    speed = request.POST.get('speed')
+    conn = psycopg2.connect(dbname='veip', user='postgres',
+                            password='postgres', host='localhost')
+    cursor = conn.cursor()
+    cursor.execute('''select "t(i)" from "TPS" where "id"=%(id_TPS)s;''',{'id_TPS':tps})
+    tps = cursor.fetchone()[0]
+    cursor.execute('''select "v(i)" from "VSP"where "id"=%(id_VSP)s;''',{'id_VSP':vsp})
+    vsp = cursor.fetchone()[0]
+    cursor.execute('''select "name_spkh" from "SPKH"where "id"=%(id_SPKH)s;''',{'id_SPKH':spkh})
+    spkh = cursor.fetchone()[0]
+    cursor.execute('''select "name_spkv" from "SPKV"where "id"=%(id_SPKV)s;''',{'id_SPKV':spkv})
+    spkv = cursor.fetchone()[0]
+    cursor.execute('''select "name_ekip" from "EKIP"where "id"=%(id_EKIP)s;''',{'id_EKIP':ekip})
+    ekip = cursor.fetchone()[0]
+    inputd=[["Тип подвижного состава", tps],["Конструкция верхнего строения пути",vsp],["Спектральные плотности неровностей пути в горизонтальной плоскости", spkh],
+            ["Спектральные плотности неровностей пути в вертикальной плоскости ", spkv],["Характерные точки кузова",ekip],["Радиус кривой, м",rk],
+            ["Расстояние между кругами катания, м", rmk],["Возвышение наружного рельса, м",voz],["Коэффициент Крипа, тс/м",krip],["Горизонтальная жесткость пути, тс/м", gor],
+            ["Половина ширины зазора в колее",pol],["Угловой коэффициент", ugl],["Соотношение коэффициентов Крипа",skrip],["Скорость движения, м/с",speed]]
     if res=='.-.':
         parent_id = request.POST.get('id')
-        print(parent_id)
         p = getResMulti('p', parent_id)
         onapr = getResMulti('onapr', parent_id)
         y = getResMulti('y', parent_id)
@@ -251,7 +282,8 @@ def viewresult(request):
         vzs = getResMulti('vzs', parent_id)
         q = getResMulti('q', parent_id)
         datasolo = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
-                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, #"vzs": vzs,
+                    "inputd":inputd}
         return render(request,"multires.html", context=datasolo)
     else:
         id_input=request.POST.get('id')
@@ -266,7 +298,8 @@ def viewresult(request):
         vzs = getRes('vzs',id_input)
         q = getRes('q',id_input)
         data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
-                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+                "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, #"vzs": vzs,
+                "inputd":inputd}
         return render(request,"restest.html", context=data)
 
 def getResMulti(name, id_inputl):
@@ -376,7 +409,8 @@ def multires(request):
     # q = createRand()
 
     data = {  "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
-            "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
+            "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, #"vzs": vzs
+              }
     return render(request,"multires.html",  context=data)
 
 def fetch_pdf_resources(uri,rel):
