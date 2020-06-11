@@ -1129,6 +1129,5 @@ class cput():
         if not sys.warnoptions:
             warnings.simplefilter("ignore")
         t = time.time()
-        print('callLOAD')
         self.load_from_db(cursor, id_input)
         print(time.time() - t)

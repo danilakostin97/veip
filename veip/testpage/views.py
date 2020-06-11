@@ -92,6 +92,7 @@ def findRes(tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed):
             data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
                     "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, "vzs": vzs}
 
+
     return data
 
 def parseData(data,param, id_input):
@@ -154,14 +155,12 @@ def setInput(user_name, tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,s
     id_spkv = cursor.fetchone()[0]
     cursor.execute('''select "id" from "EKIP" where "name_ekip" ='%s';''' % ekip)
     id_ekip = cursor.fetchone()[0]
-    print(id_tps)
     cursor.execute(
         """INSERT INTO "input" VALUES (default,%s,default,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING "id" """,
         (user_name, id_tps, id_vsp, id_spkh, id_spkv, id_ekip, rk, rmk, voz, krip, gor, pol, ugl, skrip,
          speed, parent_id))
 
     id_of_new_row = cursor.fetchone()[0]
-    print(id_of_new_row)
     conn.commit()
     return id_of_new_row
 
@@ -196,7 +195,17 @@ def resset(request):
         skrip = request.POST.get('skrip')
         speed = request.POST.get('speed')
     data=findRes(tps, vsp, spkh, spkv, ekip,rk,rmk,voz,krip,gor,pol,ugl,skrip,speed)
+    inputd = [["Тип подвижного состава", tps], ["Конструкция верхнего строения пути", vsp],
+              ["Спектральные плотности неровностей пути в горизонтальной плоскости", spkh],
+              ["Спектральные плотности неровностей пути в вертикальной плоскости ", spkv],
+              ["Характерные точки кузова", ekip], ["Радиус кривой, м", rk],
+              ["Расстояние между кругами катания, м", rmk], ["Возвышение наружного рельса, м", voz],
+              ["Коэффициент Крипа, тс/м", krip], ["Горизонтальная жесткость пути, тс/м", gor],
+              ["Половина ширины зазора в колее", pol], ["Угловой коэффициент", ugl],
+              ["Соотношение коэффициентов Крипа", skrip], ["Скорость движения, м/с", speed]]
     if data!={}:
+        new={"inputd":inputd}
+        data.update(new)
         return render(request,"restest.html", context=data)
     else:
         id_of_new_row = setCalc(request.user.username, tps, vsp, spkh, spkv, ekip, rk, rmk, voz, krip, gor, pol, ugl,
@@ -213,7 +222,7 @@ def resset(request):
         q = getRes('q', id_of_new_row)
         data = {"p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
                 "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, #"vzs": vzs
-                }
+                "inputd":inputd}
         return render(request, "restest.html", context=data)
 
 
@@ -364,7 +373,6 @@ def multires(request):
     for speed in arr_speed:
         data_Res = findRes(tps, vsp, spkh, spkv, ekip, rk, rmk, voz, krip, gor, pol, ugl, skrip, speed)
         if data_Res !={}:
-            #print(data_Res)
             if speed==speedl:
                 parent_id=setInput(request.user.username, tps, vsp, spkh, spkv, ekip, rk, rmk, voz, krip, gor, pol, ugl, skrip,
                          speed, 0)
@@ -407,9 +415,18 @@ def multires(request):
     # aksb = createRand()
     # vzs = createRand()
     # q = createRand()
-
+    speed=str(speedl)+'-'+str(speedh)
+    inputd = [["Тип подвижного состава", tps], ["Конструкция верхнего строения пути", vsp],
+              ["Спектральные плотности неровностей пути в горизонтальной плоскости", spkh],
+              ["Спектральные плотности неровностей пути в вертикальной плоскости ", spkv],
+              ["Характерные точки кузова", ekip], ["Радиус кривой, м", rk],
+              ["Расстояние между кругами катания, м", rmk], ["Возвышение наружного рельса, м", voz],
+              ["Коэффициент Крипа, тс/м", krip], ["Горизонтальная жесткость пути, тс/м", gor],
+              ["Половина ширины зазора в колее", pol], ["Угловой коэффициент", ugl],
+              ["Соотношение коэффициентов Крипа", skrip], ["Скорость движения, м/с", speed]]
     data = {  "p": p, "onapr": onapr, "y": y, "q": q, "ball": ball,
             "opzp": opzp, "aksr": aksr, "akss": akss, "aksb": aksb, #"vzs": vzs
+              "inputd":inputd
               }
     return render(request,"multires.html",  context=data)
 
@@ -475,10 +492,8 @@ def change_SPKH(request):
         f=request.POST.get('f')
         fp=request.POST.get('fp')
         fh=request.POST.get('fh')
-        print(name_spkh)
     params=[f,fp,fh]
     alert_flag=None
-    #print(re.search(r'[^\W\d]', '124.,43'))
     for param in params:
         if re.search(r'[^\W\d]', param) is not None:
             alert_flag = param
@@ -592,9 +607,7 @@ def change_EKIP(request):
 def change_TPS(request):
     args = {}
     args.update(csrf(request))
-    print('TPS')
     if request.method == "POST":
-        print(request.POST)
         t=request.POST.get('t')
         ek1=float(request.POST.get('ek1'))
         ek2=float(request.POST.get('ek2'))
@@ -653,7 +666,6 @@ def change_TPS(request):
 def change_VSP(request):
     args = {}
     args.update(csrf(request))
-    print('TPS')
     if request.method == "POST":
         v=request.POST.get('v')
         put1 = float(request.POST.get('put1'))
