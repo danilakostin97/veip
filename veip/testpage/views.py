@@ -21,14 +21,30 @@ def getHistory():
     conn = psycopg2.connect(dbname='veip', user='postgres',
                             password='postgres', host='localhost')
     cursor = conn.cursor()
+    cursor1 = conn.cursor()
     cursor.execute('''select * from (select distinct "id_input" from "result") t1, "input" where t1.id_input=input.id''')
     dataInput = []
     for row in cursor:
         inp=[]
+        cursor1.execute('''select "t(i)" from "TPS" where "id"=%(id_TPS)s;''', {'id_TPS': row[4]})
+        tps = cursor1.fetchone()[0]
+        cursor1.execute('''select "v(i)" from "VSP"where "id"=%(id_VSP)s;''', {'id_VSP': row[5]})
+        vsp = cursor1.fetchone()[0]
+        cursor1.execute('''select "name_spkh" from "SPKH"where "id"=%(id_SPKH)s;''', {'id_SPKH': row[6]})
+        spkh = cursor1.fetchone()[0]
+        cursor1.execute('''select "name_spkv" from "SPKV"where "id"=%(id_SPKV)s;''', {'id_SPKV': row[7]})
+        spkv = cursor1.fetchone()[0]
+        cursor1.execute('''select "name_ekip" from "EKIP"where "id"=%(id_EKIP)s;''', {'id_EKIP': row[8]})
+        ekip = cursor1.fetchone()[0]
         for i in range(1,18):
             inp.append(row[i])
         inp.append(row[18])
         inp.append(0)
+        inp.append(tps)
+        inp.append(vsp)
+        inp.append(spkh)
+        inp.append(spkv)
+        inp.append(ekip)
         dataInput.append(inp)
     cursor.execute('''select * from (select distinct "id_input" from "result") t3,  
 (select * from (select t1."parent_id", max(t1."cl(9)"), min(t2."cl(9)") from (select * from "input" where "parent_id">0) t1 
@@ -36,12 +52,27 @@ left join (select * from "input" where "parent_id"=0) t2 on t1."parent_id"=t2."i
 "input" on input.id=tspeed.parent_id) tmul where t3.id_input=tmul.id;''')
     for row in cursor:
         inp=[]
+        cursor1.execute('''select "t(i)" from "TPS" where "id"=%(id_TPS)s;''', {'id_TPS': row[7]})
+        tps = cursor1.fetchone()[0]
+        cursor1.execute('''select "v(i)" from "VSP"where "id"=%(id_VSP)s;''', {'id_VSP': row[8]})
+        vsp = cursor1.fetchone()[0]
+        cursor1.execute('''select "name_spkh" from "SPKH"where "id"=%(id_SPKH)s;''', {'id_SPKH': row[9]})
+        spkh = cursor1.fetchone()[0]
+        cursor1.execute('''select "name_spkv" from "SPKV"where "id"=%(id_SPKV)s;''', {'id_SPKV': row[10]})
+        spkv = cursor1.fetchone()[0]
+        cursor1.execute('''select "name_ekip" from "EKIP"where "id"=%(id_EKIP)s;''', {'id_EKIP': row[11]})
+        ekip = cursor1.fetchone()[0]
         for i in range(4,20):
             inp.append(row[i])
         speedmin=str(row[3])+'-'+str(row[2])
         inp.append(speedmin)
         inp.append(row[2])
         inp.append(row[3])
+        inp.append(tps)
+        inp.append(vsp)
+        inp.append(spkh)
+        inp.append(spkv)
+        inp.append(ekip)
         dataInput.append(inp)
     return dataInput
 
