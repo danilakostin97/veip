@@ -11,6 +11,7 @@ from string import digits
 import psycopg2
 import random
 import re
+#from django.
 
 
 def newd(request):

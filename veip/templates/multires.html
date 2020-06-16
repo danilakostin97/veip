@@ -121,7 +121,24 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+         scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Действие силы на рельс,кгс'
+                }
+            }]
+        }
+    }
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -200,7 +217,24 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+         scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Осевое напряжение, кгс/см'
+                }
+            }]
+        }
+    }
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -279,7 +313,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Прогиб рельса, см'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -361,7 +410,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Действие силы на шпалу, см'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -440,7 +504,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Напряжение в балласте, кгс/см'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -518,7 +597,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Напряжение на ОПЗП, кгс/см'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -600,7 +694,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Ускорение рельса, доли G'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -678,7 +787,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Ускорение шпалы, доли G'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
@@ -757,7 +881,22 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { scales: {
+             xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Скорость, м/с'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString:'Ускорение буксы, доли G'
+                }
+            }]
+        }}
 });
       for (var i =0; i<arr.length; i+=4) {
    myChartp.data.datasets[0].data.push(arr[i][2]);
